@@ -1,0 +1,336 @@
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-soft: #7ee787;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#__next {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+.container {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.site-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-shell {
+  flex: 1;
+  padding: 2rem 0 3rem;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-shell,
+.footer-shell,
+.split-row,
+.action-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-shell,
+.footer-shell {
+  padding: 1rem 0;
+}
+
+.nav-links,
+.footer-links,
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.brand-mark {
+  color: var(--accent);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(88, 166, 255, 0.45);
+}
+
+.cursor-blink::after {
+  content: '▌';
+  animation: blink 1s step-end infinite;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.page-stack,
+.card-list,
+.form-stack,
+.prose-shell,
+.hero-block,
+.content-grid > div,
+.content-grid > aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.small-gap {
+  gap: 0.75rem;
+}
+
+.full-height {
+  min-height: 60vh;
+}
+
+.center-block,
+.center-row {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.lede {
+  max-width: 60ch;
+}
+
+.hero-block {
+  padding: 4rem 0 1rem;
+}
+
+.section-title {
+  margin-bottom: 0.5rem;
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+.secondary-accent {
+  color: var(--accent-soft);
+}
+
+.muted-text,
+.meta-text {
+  color: var(--muted);
+}
+
+.success-text {
+  color: var(--accent-soft);
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.two-up {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.chip-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.card-shell,
+input,
+textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.card-shell {
+  padding: 1.25rem;
+}
+
+.compact-card {
+  padding: 1rem;
+}
+
+.card-link-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.chip-list,
+.chip-grid {
+  list-style: none;
+  padding: 0;
+}
+
+.chip-item {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--accent);
+  background: rgba(88, 166, 255, 0.08);
+}
+
+.button-primary,
+.button-secondary,
+button {
+  border-radius: 8px;
+  padding: 0.8rem 1.15rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button-primary,
+button {
+  background: var(--accent);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+}
+
+.button-secondary {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+.fit-width {
+  width: fit-content;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+input,
+textarea {
+  color: var(--text);
+  padding: 0.8rem 0.9rem;
+}
+
+.content-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.prose-shell {
+  max-width: 780px;
+}
+
+.prose-shell p,
+.prose-shell ul,
+.prose-shell ol,
+.prose-shell pre {
+  margin-bottom: 1rem;
+}
+
+.prose-shell code,
+.prose-shell pre {
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.prose-shell code {
+  padding: 0.1rem 0.35rem;
+}
+
+.prose-shell pre {
+  padding: 1rem;
+  overflow: auto;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-shell,
+  .footer-shell,
+  .split-row,
+  .action-row,
+  .content-grid {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .content-grid {
+    display: flex;
+  }
+
+  .center-row {
+    align-items: center;
+  }
+}
