@@ -1,0 +1,55 @@
+export const SITE_URL = "https://webvinext2.dev"; // TODO: replace with real domain before deploy
+
+export const SITE_NAME = "WebVinext2";
+
+export const SITE_DESCRIPTION =
+  "Personal site and portfolio built with Vinext, React, and deployed on Cloudflare Workers.";
+
+export const SITE_OG_IMAGE_PATH = "/og-default.svg";
+
+export const SITE_LOCALE = "en-US";
+
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+export const NAV_ITEMS: readonly NavItem[] = [
+  { label: "Home", href: "/" },
+  { label: "Blog", href: "/blog" },
+  { label: "Projects", href: "/projects" },
+] as const;
+
+export interface SocialLink {
+  label: string;
+  href: string;
+  icon: string;
+}
+
+export const SOCIAL_LINKS: readonly SocialLink[] = [
+  {
+    label: "GitHub",
+    href: "https://github.com/example", // TODO: replace with real handle
+    icon: "github",
+  },
+  {
+    label: "Twitter / X",
+    href: "https://twitter.com/example", // TODO: replace with real handle
+    icon: "twitter",
+  },
+] as const;
+
+export const FOOTER_COPYRIGHT = `© ${new Date().getFullYear()} ${SITE_NAME}. All rights reserved.`;
+
+export const SITE_CONFIG = {
+  url: SITE_URL,
+  name: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  ogImage: SITE_OG_IMAGE_PATH,
+  locale: SITE_LOCALE,
+  nav: NAV_ITEMS,
+  social: SOCIAL_LINKS,
+  footer: {
+    copyright: FOOTER_COPYRIGHT,
+  },
+} as const;

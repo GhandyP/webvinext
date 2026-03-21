@@ -1,32 +1,37 @@
 {
-  "name": "webvinext",
-  "private": true,
+  "name": "vinext-app-router-cloudflare",
   "type": "module",
-  "version": "0.0.1",
-  "packageManager": "bun@1.3.10",
-  "engines": {
-    "node": ">=22.12.0"
-  },
+  "private": true,
   "scripts": {
-    "dev": "vinext dev",
-    "build": "vinext build",
-    "start": "vinext start",
-    "deploy": "vinext deploy",
-    "check": "vinext check",
-    "verify": "bun run check && bun run build"
+    "content:generate": "node scripts/generate-mdx-content.mjs",
+    "dev": "npm run content:generate && vp dev",
+    "build": "npm run content:generate && vp build",
+    "preview": "npm run content:generate && vp preview",
+    "typecheck": "npm run content:generate && vp exec tsc --noEmit",
+    "test": "npm run content:generate && vp test",
+    "check": "npm run typecheck && npm run test",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "marked": "^17.0.4",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@cloudflare/vite-plugin": "^1.25.0",
+    "@mdx-js/mdx": "^3.1.1",
+    "@vitejs/plugin-react": "^5.1.4",
+    "@vitejs/plugin-rsc": "^0.5.19",
+    "gray-matter": "^4.0.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-server-dom-webpack": "^19.2.4",
+    "vinext": "0.0.31",
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.1.12",
+    "wrangler": "^4.66.0",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^22.13.0",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "@vitejs/plugin-react": "^4.5.2",
-    "typescript": "^5.8.0",
-    "vinext": "latest",
-    "vite": "^7.1.5"
-  }
+    "@cloudflare/workers-types": "^4.0.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "^5.9.2",
+    "vite-plus": "0.1.12"
+  },
+  "packageManager": "pnpm@10.32.1"
 }

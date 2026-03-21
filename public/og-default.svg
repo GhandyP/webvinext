@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">WebVinext2 default Open Graph image</title>
+  <desc id="desc">Terminal-inspired preview card for the WebVinext2 site.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#09111f"/>
+      <stop offset="100%" stop-color="#13243d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="70" y="70" width="1060" height="490" rx="28" fill="#0f1728" stroke="#2b415f" stroke-width="4"/>
+  <circle cx="125" cy="124" r="10" fill="#ff7d7d"/>
+  <circle cx="159" cy="124" r="10" fill="#ffd166"/>
+  <circle cx="193" cy="124" r="10" fill="#8bffb0"/>
+  <text x="110" y="245" fill="#8bffb0" font-family="monospace" font-size="72">WebVinext2</text>
+  <text x="110" y="325" fill="#dce7f7" font-family="monospace" font-size="34">Vinext + React + Cloudflare Workers</text>
+  <text x="110" y="405" fill="#8ca3c2" font-family="monospace" font-size="28">content-driven routes / canonical metadata / worker-ready deploys</text>
+</svg>
