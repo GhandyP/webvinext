@@ -6,41 +6,16 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
   return (
-    <header
-      className="surface-raised"
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: "1rem",
-        marginBlock: "1.5rem 2rem",
-        boxShadow: "0 0 24px var(--color-shadow-glow)",
-      }}
-    >
-      <a
-        href="/"
-        className="glow"
-        style={{
-          fontSize: "0.95rem",
-          fontWeight: 700,
-          letterSpacing: "0.18em",
-          textTransform: "uppercase",
-        }}
-      >
-        {SITE_NAME}
-      </a>
+    <header className="site-header">
+      <nav className="site-header__nav" aria-label="Primary navigation">
+        <a href="/" className="site-header__brand" aria-label={`${SITE_NAME} home`}>
+          <span className="site-header__logo">
+            <span className="site-header__brand-mark">{SITE_NAME}</span>
+          </span>
+          <span className="site-header__path">workers-ready portfolio</span>
+        </a>
 
-      <nav aria-label="Primary navigation">
-        <ul
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            listStyle: "none",
-            gap: "0.75rem",
-            alignItems: "center",
-          }}
-        >
+        <ul className="site-header__links">
           {NAV_ITEMS.map((item) => {
             const isActive = item.href === currentPath;
 
@@ -49,15 +24,7 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
                 <a
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    padding: "0.45rem 0.75rem",
-                    border: "1px solid var(--color-border)",
-                    borderRadius: "var(--radius)",
-                    background: isActive ? "var(--color-surface)" : "transparent",
-                    color: isActive ? "var(--color-accent-2)" : undefined,
-                  }}
+                  className={`site-header__link${isActive ? " site-header__link--active" : ""}`}
                 >
                   {item.label}
                 </a>

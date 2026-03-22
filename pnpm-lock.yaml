@@ -36,9 +36,6 @@ importers:
       '@vitejs/plugin-rsc':
         specifier: ^0.5.19
         version: 0.5.21(@voidzero-dev/vite-plus-core@0.1.12(@types/node@25.5.0)(esbuild@0.27.3)(terser@5.46.1)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react-server-dom-webpack@19.2.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(webpack@5.105.4(esbuild@0.27.3)))(react@19.2.4)
-      gray-matter:
-        specifier: ^4.0.3
-        version: 4.0.3
       react:
         specifier: ^19.2.4
         version: 19.2.4
@@ -70,6 +67,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.14)
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
       typescript:
         specifier: ^5.9.2
         version: 5.9.3

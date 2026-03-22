@@ -30,13 +30,13 @@ export default function BlogIndexPage() {
       description="Validated posts pulled from the shared MDX content layer. Drafts stay hidden, published entries stay sorted, and the route stays thin."
     >
       {posts.length > 0 ? (
-        <section style={{ display: "grid", gap: "1rem" }}>
+        <section className="section-grid">
           {posts.map((post) => (
             <BlogCard key={post.slug} post={post} />
           ))}
         </section>
       ) : (
-        <section className="surface-raised muted">No posts published yet.</section>
+        <section className="surface-raised empty-state muted">No posts published yet.</section>
       )}
     </PageShell>
   );

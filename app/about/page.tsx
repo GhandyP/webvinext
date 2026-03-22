@@ -42,11 +42,11 @@ export default function AboutPage() {
       description={about?.description ?? "This route is wired to the shared content layer, but no about entry is currently published."}
     >
       {about && Content ? (
-        <section className="surface" style={{ display: "grid", gap: "1rem" }}>
+        <section className="surface rich-copy">
           <Content components={mdxComponents} />
         </section>
       ) : (
-        <section className="surface-raised muted">
+        <section className="surface-raised empty-state muted">
           `content/about.mdx` is missing, so there is no published about entry to render yet.
         </section>
       )}

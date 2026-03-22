@@ -72,23 +72,11 @@ export default function ProjectDetailPage({ params }: ProjectPageProps) {
       title={entry.title}
       description={entry.description}
     >
-      <section className="surface" style={{ display: "grid", gap: "1rem" }}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", alignItems: "center" }}>
-          <span
-            style={{
-              padding: "0.2rem 0.55rem",
-              borderRadius: "999px",
-              border: "1px solid var(--color-border)",
-              color: "var(--color-accent-2)",
-              fontSize: "0.82rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-            }}
-          >
-            {entry.status}
-          </span>
+      <section className="surface detail-overview">
+        <div className="meta-row">
+          <span className="detail-status">{entry.status}</span>
 
-          <span className="muted" style={{ fontSize: "0.9rem" }}>
+          <span className="meta-copy">
             <time dateTime={entry.date}>
               Published {new Date(entry.date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -98,27 +86,19 @@ export default function ProjectDetailPage({ params }: ProjectPageProps) {
             </time>
           </span>
 
-          {entry.featured ? <span className="muted">Featured project</span> : null}
+          {entry.featured ? <span className="meta-copy detail-featured">Featured project</span> : null}
         </div>
 
-        <ul style={{ display: "flex", flexWrap: "wrap", listStyle: "none", gap: "0.5rem" }}>
+        <ul className="tag-list">
           {entry.stack.map((item) => (
-            <li
-              key={item}
-              style={{
-                padding: "0.2rem 0.55rem",
-                border: "1px solid var(--color-border)",
-                borderRadius: "999px",
-                fontSize: "0.82rem",
-              }}
-            >
+            <li className="tag tag--stack" key={item}>
               {item}
             </li>
           ))}
         </ul>
 
         {(entry.repositoryUrl || entry.demoUrl) ? (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.9rem" }}>
+          <div className="link-row">
             {entry.repositoryUrl ? (
               <a href={entry.repositoryUrl} target="_blank" rel="noreferrer">
                 Source repository
@@ -135,12 +115,12 @@ export default function ProjectDetailPage({ params }: ProjectPageProps) {
         )}
       </section>
 
-      <section className="surface-raised" style={{ display: "grid", gap: "0.85rem" }}>
-        <h2 className="glow" style={{ fontSize: "1.1rem" }}>Overview</h2>
+      <section className="surface-raised rich-copy">
+        <h2 className="detail-overview__title glow">Overview</h2>
         <Content components={mdxComponents} />
       </section>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+      <div className="link-row">
         <a href="/projects">Back to all projects</a>
         <a href="/">Return home</a>
       </div>

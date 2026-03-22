@@ -7,43 +7,38 @@ interface BlogCardProps {
 
 export function BlogCard({ post, href = `/blog/${post.slug}` }: BlogCardProps) {
   return (
-    <article className="surface-raised" style={{ display: "grid", gap: "0.85rem" }}>
-      <time
-        className="muted"
-        dateTime={post.date}
-        style={{ fontSize: "0.82rem", letterSpacing: "0.08em", textTransform: "uppercase" }}
-      >
-        {new Date(post.date).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })}
-      </time>
+    <article className="card-panel blog-card">
+      <div className="blog-card__top">
+        <time className="blog-card__date" dateTime={post.date}>
+          {new Date(post.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+        </time>
+      </div>
 
-      <h2 style={{ fontSize: "1.2rem", lineHeight: 1.2 }}>
+      <h2 className="blog-card__title">
         <a href={href}>{post.title}</a>
       </h2>
 
-      <p className="muted">{post.description}</p>
+      <p className="blog-card__description">{post.description}</p>
 
       {post.tags.length > 0 ? (
-        <ul style={{ display: "flex", flexWrap: "wrap", listStyle: "none", gap: "0.5rem" }}>
+        <ul className="blog-card__tags">
           {post.tags.map((tag) => (
-            <li
-              key={tag}
-              style={{
-                padding: "0.2rem 0.55rem",
-                border: "1px solid var(--color-border)",
-                borderRadius: "999px",
-                color: "var(--color-text-muted)",
-                fontSize: "0.82rem",
-              }}
-            >
+            <li className="tag tag--topic" key={tag}>
               #{tag}
             </li>
           ))}
         </ul>
       ) : null}
+
+      <div className="blog-card__footer">
+        <a className="blog-card__link" href={href}>
+          Open post
+        </a>
+      </div>
     </article>
   );
 }

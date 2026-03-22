@@ -1,85 +1,32 @@
-import matter from "gray-matter";
-
 import type { MdxContentComponent } from "./mdx.js";
 import { blogSchema, projectSchema, aboutSchema, type BlogPost, type Project, type AboutContent } from "./schema.js";
 
-const blogRawModules = import.meta.glob<string>("../../content/blog/*.mdx", {
+interface GeneratedMdxModule {
+  default: MdxContentComponent;
+  frontmatter: Record<string, unknown>;
+  rawContent: string;
+}
+
+const blogModules = import.meta.glob<GeneratedMdxModule>("../../.generated/content/blog/*.mjs", {
   eager: true,
-  query: "?raw",
-  import: "default",
 });
 
-const blogContentModules = import.meta.glob<MdxContentComponent>("../../.generated/content/blog/*.mjs", {
+const projectModules = import.meta.glob<GeneratedMdxModule>("../../.generated/content/projects/*.mjs", {
   eager: true,
-  import: "default",
 });
 
-const projectRawModules = import.meta.glob<string>("../../content/projects/*.mdx", {
+const aboutModules = import.meta.glob<GeneratedMdxModule>("../../.generated/content/about.mjs", {
   eager: true,
-  query: "?raw",
-  import: "default",
-});
-
-const projectContentModules = import.meta.glob<MdxContentComponent>("../../.generated/content/projects/*.mjs", {
-  eager: true,
-  import: "default",
-});
-
-const aboutRawModules = import.meta.glob<string>("../../content/about.mdx", {
-  eager: true,
-  query: "?raw",
-  import: "default",
-});
-
-const aboutContentModules = import.meta.glob<MdxContentComponent>("../../.generated/content/about.mjs", {
-  eager: true,
-  import: "default",
 });
 
 function slugFromPath(path: string): string {
   const filename = path.split("/").pop() ?? "";
-  return filename.replace(/\.mdx$/, "");
+  return filename.replace(/\.mjs$/, "");
 }
 
-function resolveRawSource(raw: unknown, sourcePath: string): string {
-  if (typeof raw === "string") {
-    return raw;
-  }
-
-  if (
-    raw &&
-    typeof raw === "object" &&
-    "default" in raw &&
-    typeof (raw as { default: unknown }).default === "string"
-  ) {
-    return (raw as { default: string }).default;
-  }
-
-  throw new Error(`Expected raw MDX source string for ${sourcePath}`);
-}
-
-function generatedPathFromSourcePath(sourcePath: string): string {
-  return sourcePath
-    .replace("../../content/", "../../.generated/content/")
-    .replace(/\.mdx$/, ".mjs");
-}
-
-function getContentComponent(
-  modules: Record<string, MdxContentComponent>,
-  sourcePath: string,
-  collectionName: string
-): MdxContentComponent {
-  const generatedPath = generatedPathFromSourcePath(sourcePath);
-  const Content = modules[generatedPath];
-  if (!Content) {
-    throw new Error(`Missing generated MDX component for ${collectionName} entry: ${sourcePath}`);
-  }
-  return Content;
-}
-
-function parseAndValidateBlog(raw: string, sourcePath: string, Content: MdxContentComponent): BlogPost {
-  const { data, content } = matter(raw);
-  const slug = data.slug ?? slugFromPath(sourcePath);
+function parseAndValidateBlog(module: GeneratedMdxModule, sourcePath: string): BlogPost {
+  const data = module.frontmatter;
+  const slug = (data.slug as string | undefined) ?? slugFromPath(sourcePath);
   const result = blogSchema.safeParse({ ...data, slug });
   if (!result.success) {
     throw new Error(
@@ -88,14 +35,14 @@ function parseAndValidateBlog(raw: string, sourcePath: string, Content: MdxConte
   }
   return {
     ...result.data,
-    body: content.trim(),
-    Content,
+    body: module.rawContent.trim(),
+    Content: module.default,
   };
 }
 
-function parseAndValidateProject(raw: string, sourcePath: string, Content: MdxContentComponent): Project {
-  const { data, content } = matter(raw);
-  const slug = data.slug ?? slugFromPath(sourcePath);
+function parseAndValidateProject(module: GeneratedMdxModule, sourcePath: string): Project {
+  const data = module.frontmatter;
+  const slug = (data.slug as string | undefined) ?? slugFromPath(sourcePath);
   const result = projectSchema.safeParse({ ...data, slug });
   if (!result.success) {
     throw new Error(
@@ -104,13 +51,13 @@ function parseAndValidateProject(raw: string, sourcePath: string, Content: MdxCo
   }
   return {
     ...result.data,
-    body: content.trim(),
-    Content,
+    body: module.rawContent.trim(),
+    Content: module.default,
   };
 }
 
-function parseAndValidateAbout(raw: string, sourcePath: string, Content: MdxContentComponent): AboutContent {
-  const { data, content } = matter(raw);
+function parseAndValidateAbout(module: GeneratedMdxModule, sourcePath: string): AboutContent {
+  const data = module.frontmatter;
   const result = aboutSchema.safeParse(data);
   if (!result.success) {
     throw new Error(
@@ -119,8 +66,8 @@ function parseAndValidateAbout(raw: string, sourcePath: string, Content: MdxCont
   }
   return {
     ...result.data,
-    body: content.trim(),
-    Content,
+    body: module.rawContent.trim(),
+    Content: module.default,
   };
 }
 
@@ -140,8 +87,8 @@ export function checkDuplicateSlugs(
 }
 
 export function loadBlogPosts(): BlogPost[] {
-  const posts = Object.entries(blogRawModules).map(([path, raw]) =>
-    parseAndValidateBlog(resolveRawSource(raw, path), path, getContentComponent(blogContentModules, path, "blog"))
+  const posts = Object.entries(blogModules).map(([path, mod]) =>
+    parseAndValidateBlog(mod, path)
   );
   checkDuplicateSlugs(posts, "blog");
   const filteredPosts = posts.filter((post) => !post.draft);
@@ -154,8 +101,8 @@ export function loadBlogPosts(): BlogPost[] {
 }
 
 export function loadProjects(): Project[] {
-  const projects = Object.entries(projectRawModules).map(([path, raw]) =>
-    parseAndValidateProject(resolveRawSource(raw, path), path, getContentComponent(projectContentModules, path, "projects"))
+  const projects = Object.entries(projectModules).map(([path, mod]) =>
+    parseAndValidateProject(mod, path)
   );
   checkDuplicateSlugs(projects, "projects");
   projects.sort((a, b) => {
@@ -167,15 +114,15 @@ export function loadProjects(): Project[] {
 }
 
 export function loadAbout(): AboutContent | null {
-  const entries = Object.entries(aboutRawModules);
+  const entries = Object.entries(aboutModules);
   if (entries.length === 0) {
     return null;
   }
   if (entries.length > 1) {
-    throw new Error("Multiple about.mdx files found; only one is allowed");
+    throw new Error("Multiple about.mjs files found; only one is allowed");
   }
-  const [path, raw] = entries[0]!;
-  return parseAndValidateAbout(resolveRawSource(raw, path), path, getContentComponent(aboutContentModules, path, "about"));
+  const [path, mod] = entries[0]!;
+  return parseAndValidateAbout(mod, path);
 }
 
 export function getBlogPostBySlug(slug: string): BlogPost | null {

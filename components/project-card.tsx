@@ -6,56 +6,44 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, href = `/projects/${project.slug}` }: ProjectCardProps) {
-  return (
-    <article className="surface-raised" style={{ display: "grid", gap: "0.85rem" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", alignItems: "center" }}>
-        <span
-          style={{
-            padding: "0.2rem 0.55rem",
-            borderRadius: "999px",
-            border: "1px solid var(--color-border)",
-            color: "var(--color-accent-2)",
-            fontSize: "0.82rem",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-          }}
-        >
-          {project.status}
-        </span>
+  const statusClass = `project-card__status project-card__status--${project.status.toLowerCase()}`;
 
-        {project.featured ? (
-          <span className="muted" style={{ fontSize: "0.82rem" }}>
-            featured
-          </span>
-        ) : null}
+  return (
+    <article className="card-panel project-card">
+      <div className="project-card__top">
+        <div className="project-card__badges">
+          <span className={statusClass}>{project.status}</span>
+
+          {project.featured ? <span className="project-card__featured">featured signal</span> : null}
+        </div>
       </div>
 
-      <h2 style={{ fontSize: "1.2rem", lineHeight: 1.2 }}>
+      <h2 className="project-card__title">
         <a href={href}>{project.title}</a>
       </h2>
 
-      <p className="muted">{project.description}</p>
+      <p className="project-card__description">{project.description}</p>
 
-      <ul style={{ display: "flex", flexWrap: "wrap", listStyle: "none", gap: "0.5rem" }}>
+      <ul className="project-card__tags">
         {project.stack.map((item) => (
-          <li
-            key={item}
-            style={{
-              padding: "0.2rem 0.55rem",
-              border: "1px solid var(--color-border)",
-              borderRadius: "999px",
-              fontSize: "0.82rem",
-            }}
-          >
+          <li className="tag tag--stack" key={item}>
             {item}
           </li>
         ))}
       </ul>
 
       {(project.repositoryUrl || project.demoUrl) ? (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.9rem" }}>
-          {project.repositoryUrl ? <a href={project.repositoryUrl}>Source</a> : null}
-          {project.demoUrl ? <a href={project.demoUrl}>Live demo</a> : null}
+        <div className="project-card__footer">
+          {project.repositoryUrl ? (
+            <a className="project-card__link" href={project.repositoryUrl}>
+              Source
+            </a>
+          ) : null}
+          {project.demoUrl ? (
+            <a className="project-card__link" href={project.demoUrl}>
+              Live demo
+            </a>
+          ) : null}
         </div>
       ) : null}
     </article>

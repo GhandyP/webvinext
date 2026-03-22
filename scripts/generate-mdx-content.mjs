@@ -29,14 +29,19 @@ async function writeCompiledModule(sourceFile) {
   const relativePath = path.relative(contentRoot, sourceFile);
   const outputPath = path.join(outputRoot, relativePath).replace(/\.mdx$/, ".mjs");
   const raw = await readFile(sourceFile, "utf8");
-  const { content } = matter(raw);
+  const { data, content } = matter(raw);
   const compiled = await compile(content, {
     jsx: false,
     outputFormat: "program",
   });
 
   await mkdir(path.dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, String(compiled), "utf8");
+  
+  const finalCode = String(compiled) +
+    `\nexport const frontmatter = ${JSON.stringify(data)};\n` +
+    `export const rawContent = ${JSON.stringify(content)};\n`;
+
+  await writeFile(outputPath, finalCode, "utf8");
 }
 
 await rm(outputRoot, { recursive: true, force: true });

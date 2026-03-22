@@ -68,43 +68,36 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       title={post.title}
       description={post.description}
     >
-      <article className="surface" style={{ display: "grid", gap: "1rem" }}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", alignItems: "center" }}>
-          <span className="muted" style={{ fontSize: "0.82rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+      <article className="surface rich-copy">
+        <div className="meta-row">
+          <span className="meta-copy">
             <time dateTime={post.date}>Published {formatDate(post.date)}</time>
           </span>
 
           {post.updatedDate ? (
-            <span className="muted" style={{ fontSize: "0.82rem" }}>
+            <span className="meta-copy">
               <time dateTime={post.updatedDate}>Updated {formatDate(post.updatedDate)}</time>
             </span>
           ) : null}
         </div>
 
         {post.tags.length > 0 ? (
-          <ul style={{ display: "flex", flexWrap: "wrap", listStyle: "none", gap: "0.5rem" }}>
+          <ul className="tag-list">
             {post.tags.map((tag) => (
-              <li
-                key={tag}
-                style={{
-                  padding: "0.2rem 0.55rem",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: "999px",
-                  color: "var(--color-text-muted)",
-                  fontSize: "0.82rem",
-                }}
-              >
+              <li className="tag tag--topic" key={tag}>
                 #{tag}
               </li>
             ))}
           </ul>
         ) : null}
 
-        <div style={{ display: "grid", gap: "1rem" }}>
+        <div className="rich-copy">
           <Content components={mdxComponents} />
         </div>
 
-        <a href="/blog">Back to blog</a>
+        <div className="link-row">
+          <a href="/blog">Back to blog</a>
+        </div>
       </article>
     </PageShell>
   );

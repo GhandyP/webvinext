@@ -22,60 +22,107 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  const recentPosts = loadBlogPosts().slice(0, 3);
-  const featuredProjects = loadProjects().filter((project) => project.featured).slice(0, 3);
+  const allPosts = loadBlogPosts();
+  const allProjects = loadProjects();
+  const recentPosts = allPosts.slice(0, 3);
+  const featuredProjects = allProjects.filter((project) => project.featured).slice(0, 3);
 
   return (
     <PageShell
       currentPath="/"
-      eyebrow="Console log"
+      eyebrow="Available for focused builds"
       title={SITE_NAME}
       description={SITE_DESCRIPTION}
     >
-      <section className="surface" style={{ display: "grid", gap: "1rem" }}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-          <a href="/projects">Inspect projects</a>
-          <a href="/blog">Read notes</a>
+      <section className="section-stack">
+        <div className="hero-stats">
+          <article className="hero-stat">
+            <div className="hero-stat__meta">
+              <span className="hero-stat__label">published projects</span>
+              <span className="hero-stat__signal" aria-hidden="true" />
+            </div>
+            <p className="hero-stat__value">{allProjects.length}</p>
+          </article>
+
+          <article className="hero-stat">
+            <div className="hero-stat__meta">
+              <span className="hero-stat__label">build notes</span>
+              <span className="hero-stat__signal" aria-hidden="true" />
+            </div>
+            <p className="hero-stat__value">{allPosts.length}</p>
+          </article>
+
+          <article className="hero-stat">
+            <div className="hero-stat__meta">
+              <span className="hero-stat__label">runtime focus</span>
+              <span className="hero-stat__signal" aria-hidden="true" />
+            </div>
+            <p className="hero-stat__value">Workers</p>
+          </article>
         </div>
 
-        <p className="muted" style={{ maxWidth: "60ch" }}>
-          Built on Vinext and deployed for the Workers runtime, this site keeps its content,
-          structure, and shipping workflow explicit. No filler sections, no borrowed starter
-          chrome - just a clean terminal-flavored surface for writing and shipping.
-        </p>
+        <article className="cta-card">
+          <p className="cta-card__title">Signal over clutter.</p>
+          <p className="cta-card__copy">
+            This homepage keeps the content model intact but upgrades the presentation with a more
+            deliberate hierarchy, stronger cards, and a clearer editorial rhythm.
+          </p>
+        </article>
       </section>
 
-      <section style={{ display: "grid", gap: "1rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", alignItems: "baseline" }}>
-          <h2 className="glow" style={{ fontSize: "1.4rem" }}>Featured Projects</h2>
-          <a href="/projects">View all</a>
+      <section className="section-stack">
+        <div className="section-heading">
+          <div className="section-heading__intro">
+            <p className="section-heading__eyebrow">Selected work</p>
+            <div className="section-heading__row">
+              <span className="section-heading__number">01</span>
+              <h2 className="section-heading__title">Featured Projects</h2>
+            </div>
+          </div>
+          <div className="section-heading__line-wrap">
+            <div className="section-heading__line" aria-hidden="true" />
+            <a className="section-link" href="/projects">
+              View all
+            </a>
+          </div>
         </div>
 
         {featuredProjects.length > 0 ? (
-          <div style={{ display: "grid", gap: "1rem" }}>
+          <div className="section-grid section-grid--cards">
             {featuredProjects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         ) : (
-          <div className="surface-raised muted">No featured projects published yet.</div>
+          <div className="surface-raised empty-state muted">No featured projects published yet.</div>
         )}
       </section>
 
-      <section style={{ display: "grid", gap: "1rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", alignItems: "baseline" }}>
-          <h2 className="glow" style={{ fontSize: "1.4rem" }}>Recent Posts</h2>
-          <a href="/blog">View all</a>
+      <section className="section-stack">
+        <div className="section-heading">
+          <div className="section-heading__intro">
+            <p className="section-heading__eyebrow">Journal / build log</p>
+            <div className="section-heading__row">
+              <span className="section-heading__number">02</span>
+              <h2 className="section-heading__title">Recent Posts</h2>
+            </div>
+          </div>
+          <div className="section-heading__line-wrap">
+            <div className="section-heading__line" aria-hidden="true" />
+            <a className="section-link" href="/blog">
+              View all
+            </a>
+          </div>
         </div>
 
         {recentPosts.length > 0 ? (
-          <div style={{ display: "grid", gap: "1rem" }}>
+          <div className="section-grid section-grid--cards">
             {recentPosts.map((post) => (
               <BlogCard key={post.slug} post={post} />
             ))}
           </div>
         ) : (
-          <div className="surface-raised muted">No posts published yet.</div>
+          <div className="surface-raised empty-state muted">No posts published yet.</div>
         )}
       </section>
     </PageShell>

@@ -30,13 +30,13 @@ export default function ProjectsPage() {
       description="Validated project entries pulled from the shared content layer, sorted for a stable build output."
     >
       {projects.length > 0 ? (
-        <section style={{ display: "grid", gap: "1rem" }}>
+        <section className="section-grid">
           {projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </section>
       ) : (
-        <div className="surface-raised muted">No projects published yet.</div>
+        <div className="surface-raised empty-state muted">No projects published yet.</div>
       )}
     </PageShell>
   );
