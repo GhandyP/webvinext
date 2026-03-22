@@ -1,19 +1,36 @@
 ---
-title: "webvinext2 Site"
-description: "A personal content site built with Vinext, React, and Cloudflare Workers."
-date: "2026-03-18T00:00:00.000Z"
+title: "WebVinext Platform"
+description: "The next iteration of my personal site: a content-driven portfolio rebuilt for Cloudflare Workers with a stronger editorial system and cleaner runtime boundaries."
+date: "2026-03-21T00:00:00.000Z"
 status: "active"
 stack:
   - vinext
   - react
   - cloudflare-workers
+  - mdx
 featured: true
+repositoryUrl: "https://github.com/GhandyP/webvinext"
+slug: "webvinext2-site"
 ---
 
-This project is the current site you are viewing. It uses Vinext for App Router routing on Cloudflare Workers, with MDX-based content for blog posts, projects, and an about page.
+This project is the current evolution of my personal site: a portfolio platform that combines content publishing, project storytelling, and a Worker-friendly delivery model.
+
+It takes the strongest ideas from the previous Astro version - clear positioning, structured writing, and a project-first narrative - and rebuilds them on a runtime that is better aligned with how I want to ship and iterate.
 
 ## Goals
 
-- Fast, edge-deployed content site
-- Schema-validated content pipeline
-- Terminal-inspired visual identity
+- Replace placeholder positioning with a clearer engineering narrative
+- Keep the content model explicit so new posts and projects stay easy to publish
+- Make preview, build, and deployment behavior reliable in the Cloudflare Worker runtime
+- Treat visual design and platform architecture as parts of the same product surface
+
+## What Changed
+
+- Reworked the site around generated MDX modules instead of runtime frontmatter parsing
+- Strengthened the homepage, shell, and cards with a more deliberate editorial visual language
+- Kept validation in the content layer so publishing stays structured instead of ad hoc
+- Reduced platform friction by fixing Worker preview compatibility
+
+## Outcome
+
+The result is not just a nicer portfolio. It is a stronger base for ongoing writing, case studies, and future product experiments.

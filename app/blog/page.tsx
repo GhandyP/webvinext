@@ -5,7 +5,7 @@ import { buildMetadata } from "../../lib/seo";
 
 const seoData = buildMetadata({
   title: "Blog",
-  description: "Notes, build logs, and implementation details from the site content layer.",
+  description: "Essays on engineering, edge systems, platform decisions, and AI-assisted workflows.",
   path: "/blog",
 });
 
@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
       currentPath="/blog"
       eyebrow="Writing"
       title="Blog"
-      description="Validated posts pulled from the shared MDX content layer. Drafts stay hidden, published entries stay sorted, and the route stays thin."
+      description="Writing that connects platform decisions, delivery habits, edge tooling, and the lessons behind real builds."
     >
       {posts.length > 0 ? (
         <section className="section-grid">

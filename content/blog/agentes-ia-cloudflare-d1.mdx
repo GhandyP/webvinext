@@ -1,0 +1,32 @@
+---
+title: "Integrating AI Agents with Cloudflare D1"
+description: "What I learned while exploring how autonomous workflows can use a serverless SQLite database at the edge."
+date: "2026-03-10T00:00:00.000Z"
+updatedDate: "2026-03-22T00:00:00.000Z"
+draft: false
+tags:
+  - ai
+  - cloudflare
+  - d1
+slug: "ai-agents-cloudflare-d1"
+---
+
+As AI-assisted systems become more capable, they also need better ways to persist context without adding unnecessary infrastructure complexity.
+
+One of the most interesting directions I explored was pairing Cloudflare Workers with D1 so agents could store and retrieve structured context close to where the compute runs.
+
+## Why D1 Was Interesting
+
+D1 offers a simple edge-friendly persistence model. For agent workflows, that makes it useful for lightweight state, contextual lookups, and durable traces of what happened between interactions.
+
+## What the Prototype Proved
+
+In practice, the combination was useful for small retrieval flows where an agent needed to pull context before generating a response. The setup stayed much simpler than a traditional database-backed service while still giving me structured storage.
+
+## Key Takeaways
+
+- Edge-native persistence changes how you think about agent state
+- Lightweight databases are often enough for orchestration and context lookup
+- The hardest part is not storage - it is designing clear boundaries for what the agent should remember and why
+
+This is still an active area of exploration, but it is already shaping how I think about AI workflows at the edge.

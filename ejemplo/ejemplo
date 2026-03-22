@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="es" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GhandyIT Portfolio</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --surface2: #1a2235;
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --text: #e2e8f0;
+      --muted: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      min-height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* Animated grid background */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob1 { width: 500px; height: 500px; background: rgba(0,229,255,0.07); top: -100px; left: -100px; }
+    .blob2 { width: 400px; height: 400px; background: rgba(124,58,237,0.08); bottom: 0; right: -100px; }
+
+    .content { position: relative; z-index: 1; }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,229,255,0.1);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .logo span { color: var(--text); }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      color: var(--accent);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    #hero-name-display {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .name-accent { color: var(--accent); }
+
+    #hero-title-display {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: var(--accent2);
+      margin-bottom: 1.25rem;
+      font-weight: 400;
+    }
+
+    #hero-subtitle-display {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #0a0e1a;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .btn-primary:hover { background: #33eaff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,229,255,0.25); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text);
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 1px solid rgba(226,232,240,0.2);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* Hero visual */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .avatar-ring {
+      position: relative;
+      width: 280px;
+      height: 280px;
+    }
+
+    .avatar-ring::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent), var(--accent2), var(--accent));
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .avatar-inner {
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .avatar-initials {
+      font-family: 'Space Mono', monospace;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.05em;
+      user-select: none;
+    }
+
+    .avatar-tags {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+    }
+
+    .floating-tag {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 8px;
+      padding: 0.35rem 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      white-space: nowrap;
+      animation: float 4s ease-in-out infinite;
+    }
+    .floating-tag:nth-child(1) { top: 5%; left: -20%; animation-delay: 0s; }
+    .floating-tag:nth-child(2) { bottom: 15%; right: -25%; animation-delay: 1.2s; }
+    .floating-tag:nth-child(3) { top: 40%; right: -30%; animation-delay: 0.6s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Sections */
+    section { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-title h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,229,255,0.3), transparent);
+    }
+    .section-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      background: rgba(0,229,255,0.08);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid rgba(0,229,255,0.15);
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    #about-text-display {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skill-tag {
+      background: rgba(124,58,237,0.12);
+      border: 1px solid rgba(124,58,237,0.25);
+      color: #a78bfa;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .skill-tag:hover { background: rgba(124,58,237,0.2); transform: translateY(-2px); }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .project-card:hover { border-color: rgba(0,229,255,0.2); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .project-icon {
+      width: 44px; height: 44px;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .project-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: all 0.25s;
+    }
+    .service-card:hover { border-color: rgba(124,58,237,0.3); transform: translateY(-3px); }
+
+    .service-icon {
+      width: 40px; height: 40px;
+      background: rgba(124,58,237,0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #a78bfa;
+      margin-bottom: 1rem;
+    }
+
+    .service-title {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .service-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Contact */
+    .contact-wrap {
+      background: var(--surface);
+      border: 1px solid rgba(0,229,255,0.1);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-wrap::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(ellipse at center, rgba(0,229,255,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .contact-heading {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-sub {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    #contact-email-display {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid rgba(0,229,255,0.2);
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      background: rgba(0,229,255,0.05);
+      transition: all 0.2s;
+      margin-bottom: 2rem;
+      cursor: pointer;
+    }
+    #contact-email-display:hover { background: rgba(0,229,255,0.1); transform: translateY(-2px); }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .social-link:hover { border-color: rgba(0,229,255,0.3); color: var(--accent); transform: translateY(-3px); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    footer span { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero-visual { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .hero-cta { justify-content: center; }
+      .nav-links { display: none; }
+    }
+
+    /* Animations on load */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease forwards; opacity: 0; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.55s; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="app-wrapper">
+   <div class="grid-bg"></div>
+   <div class="glow-blob blob1"></div>
+   <div class="glow-blob blob2"></div>
+   <div class="content"><!-- NAV -->
+    <nav>
+     <div class="nav-inner"><a href="#" class="logo">Ghandy<span>IT</span></a>
+      <ul class="nav-links">
+       <li><a href="#about">Sobre mí</a></li>
+       <li><a href="#projects">Proyectos</a></li>
+       <li><a href="#services">Servicios</a></li>
+       <li><a href="#contact">Contacto</a></li>
+      </ul>
+     </div>
+    </nav><!-- HERO -->
+    <div class="hero">
+     <div class="hero-left">
+      <div class="hero-badge fade-up delay-1"><span class="badge-dot"></span> Disponible para proyectos
+      </div>
+      <h1 id="hero-name-display" class="fade-up delay-2">Hola, soy <span class="name-accent">GhandyIT</span></h1>
+      <p id="hero-title-display" class="fade-up delay-3">// Desarrollador Full Stack &amp; Consultor IT</p>
+      <p id="hero-subtitle-display" class="fade-up delay-4">Transformo ideas en soluciones digitales robustas. Especializado en desarrollo web, arquitectura de software y consultoría tecnológica.</p>
+      <div class="hero-cta fade-up delay-5"><a href="#projects" class="btn-primary"> <i data-lucide="folder-open" style="width:16px;height:16px;"></i> Ver proyectos </a> <a href="#contact" class="btn-outline"> <i data-lucide="send" style="width:16px;height:16px;"></i> Contáctame </a>
+      </div>
+     </div>
+     <div class="hero-visual fade-up delay-3">
+      <div class="avatar-ring">
+       <div class="avatar-inner"><span class="avatar-initials">G.</span>
+       </div>
+       <div class="avatar-tags"><span class="floating-tag">&lt;/code&gt;</span> <span class="floating-tag">git commit</span> <span class="floating-tag">deploy ✓</span>
+       </div>
+      </div>
+     </div>
+    </div><!-- ABOUT -->
+    <section id="about">
+     <div class="section-title"><span class="section-num">01</span>
+      <h2>Sobre mí</h2>
+      <div class="section-line"></div>
+     </div>
+     <div class="about-grid">
+      <p id="about-text-display">Soy un profesional IT apasionado por la tecnología y la innovación. Con años de experiencia construyendo productos digitales, me especializo en crear soluciones que combinan rendimiento, escalabilidad y una excelente experiencia de usuario. Me encanta trabajar en proyectos desafiantes que empujen los límites de lo posible.</p>
+      <div>
+       <p style="color: var(--muted); font-size:0.85rem; margin-bottom:1rem; font-family:'Space Mono',monospace;">// stack tecnológico</p>
+       <div class="skills-list"><span class="skill-tag">JavaScript</span> <span class="skill-tag">TypeScript</span> <span class="skill-tag">React</span> <span class="skill-tag">Node.js</span> <span class="skill-tag">Python</span> <span class="skill-tag">Docker</span> <span class="skill-tag">AWS</span> <span class="skill-tag">PostgreSQL</span> <span class="skill-tag">MongoDB</span> <span class="skill-tag">GraphQL</span> <span class="skill-tag">Git</span> <span class="skill-tag">Linux</span>
+       </div>
+      </div>
+     </div>
+    </section><!-- PROJECTS -->
+    <section id="projects">
+     <div class="section-title"><span class="section-num">02</span>
+      <h2>Proyectos</h2>
+      <div class="section-line"></div>
+     </div>
+     <div class="projects-grid">
+      <div class="project-card">
+       <div class="project-icon"><i data-lucide="shopping-cart" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="project-title">
+        E-Commerce Platform
+       </div>
+       <div class="project-desc">
+        Plataforma de comercio electrónico completa con carrito, pagos y panel de administración en tiempo real.
+       </div>
+       <div class="project-tags"><span class="project-tag">React</span> <span class="project-tag">Node.js</span> <span class="project-tag">MongoDB</span> <span class="project-tag">Stripe</span>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-icon"><i data-lucide="bar-chart-2" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="project-title">
+        Dashboard Analytics
+       </div>
+       <div class="project-desc">
+        Sistema de análisis de datos con visualizaciones interactivas, reportes automáticos y alertas inteligentes.
+       </div>
+       <div class="project-tags"><span class="project-tag">TypeScript</span> <span class="project-tag">D3.js</span> <span class="project-tag">PostgreSQL</span> <span class="project-tag">AWS</span>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-icon"><i data-lucide="smartphone" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="project-title">
+        App Móvil SaaS
+       </div>
+       <div class="project-desc">
+        Aplicación multiplataforma para gestión empresarial con sincronización en tiempo real y modo offline.
+       </div>
+       <div class="project-tags"><span class="project-tag">React Native</span> <span class="project-tag">GraphQL</span> <span class="project-tag">Firebase</span>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-icon"><i data-lucide="shield" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="project-title">
+        Sistema de Seguridad
+       </div>
+       <div class="project-desc">
+        Infraestructura de seguridad con autenticación multifactor, monitoreo y auditoría de accesos.
+       </div>
+       <div class="project-tags"><span class="project-tag">Python</span> <span class="project-tag">Docker</span> <span class="project-tag">OAuth2</span> <span class="project-tag">Redis</span>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-icon"><i data-lucide="cpu" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="project-title">
+        API Microservicios
+       </div>
+       <div class="project-desc">
+        Arquitectura de microservicios escalable con balanceo de carga, caching y documentación automática.
+       </div>
+       <div class="project-tags"><span class="project-tag">Node.js</span> <span class="project-tag">Kubernetes</span> <span class="project-tag">RabbitMQ</span>
+       </div>
+      </div>
+      <div class="project-card">
+       <div class="project-icon"><i data-lucide="bot" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="project-title">
+        Chatbot IA
+       </div>
+       <div class="project-desc">
+        Asistente virtual inteligente con procesamiento de lenguaje natural integrado en plataformas empresariales.
+       </div>
+       <div class="project-tags"><span class="project-tag">Python</span> <span class="project-tag">OpenAI</span> <span class="project-tag">FastAPI</span> <span class="project-tag">Vue.js</span>
+       </div>
+      </div>
+     </div>
+    </section><!-- SERVICES -->
+    <section id="services">
+     <div class="section-title"><span class="section-num">03</span>
+      <h2>Servicios</h2>
+      <div class="section-line"></div>
+     </div>
+     <div class="services-grid">
+      <div class="service-card">
+       <div class="service-icon"><i data-lucide="code-2" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="service-title">
+        Desarrollo Web
+       </div>
+       <div class="service-desc">
+        Aplicaciones web modernas, rápidas y escalables con las mejores tecnologías del mercado.
+       </div>
+      </div>
+      <div class="service-card">
+       <div class="service-icon"><i data-lucide="database" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="service-title">
+        Backend &amp; APIs
+       </div>
+       <div class="service-desc">
+        Diseño e implementación de APIs robustas, bases de datos optimizadas y arquitecturas sólidas.
+       </div>
+      </div>
+      <div class="service-card">
+       <div class="service-icon"><i data-lucide="cloud" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="service-title">
+        Cloud &amp; DevOps
+       </div>
+       <div class="service-desc">
+        Infraestructura en la nube, CI/CD, contenedores y automatización de procesos de despliegue.
+       </div>
+      </div>
+      <div class="service-card">
+       <div class="service-icon"><i data-lucide="lightbulb" style="width:20px;height:20px;"></i>
+       </div>
+       <div class="service-title">
+        Consultoría IT
+       </div>
+       <div class="service-desc">
+        Asesoramiento estratégico en tecnología, arquitectura de soluciones y transformación digital.
+       </div>
+      </div>
+     </div>
+    </section><!-- CONTACT -->
+    <section id="contact">
+     <div class="section-title"><span class="section-num">04</span>
+      <h2>Contacto</h2>
+      <div class="section-line"></div>
+     </div>
+     <div class="contact-wrap">
+      <h3 class="contact-heading">¿Tienes un proyecto en mente?</h3>
+      <p class="contact-sub">Hablemos y convirtamos tu idea en realidad digital.</p>
+      <div><a id="contact-email-display" href="mailto:contacto@ghandyit.com"> <i data-lucide="mail" style="width:18px;height:18px;"></i> contacto@ghandyit.com </a>
+      </div>
+      <div class="social-links"><a href="#" class="social-link" title="GitHub"> <i data-lucide="github" style="width:18px;height:18px;"></i> </a> <a href="#" class="social-link" title="LinkedIn"> <i data-lucide="linkedin" style="width:18px;height:18px;"></i> </a> <a href="#" class="social-link" title="Twitter"> <i data-lucide="twitter" style="width:18px;height:18px;"></i> </a> <a href="#" class="social-link" title="WhatsApp"> <i data-lucide="message-circle" style="width:18px;height:18px;"></i> </a>
+      </div>
+     </div>
+    </section><!-- FOOTER -->
+    <footer>
+     <p>Construido con <span>♥</span> por <span>GhandyIT</span> — 2025</p>
+    </footer>
+   </div><!-- /content -->
+  </div><!-- /app-wrapper -->
+  <script>
+    lucide.createIcons();
+
+    const defaultConfig = {
+      hero_name: "Hola, soy GhandyIT",
+      hero_title: "// Desarrollador Full Stack & Consultor IT",
+      hero_subtitle: "Transformo ideas en soluciones digitales robustas. Especializado en desarrollo web, arquitectura de software y consultoría tecnológica.",
+      about_text: "Soy un profesional IT apasionado por la tecnología y la innovación. Con años de experiencia construyendo productos digitales, me especializo en crear soluciones que combinan rendimiento, escalabilidad y una excelente experiencia de usuario. Me encanta trabajar en proyectos desafiantes que empujen los límites de lo posible.",
+      contact_email: "contacto@ghandyit.com",
+      background_color: "#0a0e1a",
+      surface_color: "#111827",
+      text_color: "#e2e8f0",
+      accent_color: "#00e5ff",
+      secondary_color: "#7c3aed"
+    };
+
+    function applyConfig(config) {
+      // Text updates
+      const nameEl = document.getElementById('hero-name-display');
+      if (nameEl) {
+        const val = config.hero_name || defaultConfig.hero_name;
+        nameEl.innerHTML = val;
+      }
+      const titleEl = document.getElementById('hero-title-display');
+      if (titleEl) titleEl.textContent = config.hero_title || defaultConfig.hero_title;
+
+      const subtitleEl = document.getElementById('hero-subtitle-display');
+      if (subtitleEl) subtitleEl.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+
+      const aboutEl = document.getElementById('about-text-display');
+      if (aboutEl) aboutEl.textContent = config.about_text || defaultConfig.about_text;
+
+      const emailEl = document.getElementById('contact-email-display');
+      if (emailEl) {
+        const email = config.contact_email || defaultConfig.contact_email;
+        emailEl.href = `mailto:${email}`;
+        // Preserve icon, update just the text node
+        const iconEl = emailEl.querySelector('i');
+        emailEl.innerHTML = '';
+        if (iconEl) emailEl.appendChild(iconEl);
+        emailEl.appendChild(document.createTextNode(' ' + email));
+      }
+
+      // Color updates
+      const bg = config.background_color || defaultConfig.background_color;
+      const surface = config.surface_color || defaultConfig.surface_color;
+      const text = config.text_color || defaultConfig.text_color;
+      const accent = config.accent_color || defaultConfig.accent_color;
+      const secondary = config.secondary_color || defaultConfig.secondary_color;
+
+      document.documentElement.style.setProperty('--bg', bg);
+      document.documentElement.style.setProperty('--surface', surface);
+      document.documentElement.style.setProperty('--text', text);
+      document.documentElement.style.setProperty('--accent', accent);
+      document.documentElement.style.setProperty('--accent2', secondary);
+
+      lucide.createIcons();
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          applyConfig(config);
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); }
+            },
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (v) => { config.secondary_color = v; window.elementSdk.setConfig({ secondary_color: v }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['hero_name', config.hero_name || defaultConfig.hero_name],
+          ['hero_title', config.hero_title || defaultConfig.hero_title],
+          ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+          ['about_text', config.about_text || defaultConfig.about_text],
+          ['contact_email', config.contact_email || defaultConfig.contact_email]
+        ])
+      });
+    }
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dfa4a60626b4ba4',t:'MTc3NDA2ODE1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -5,7 +5,7 @@ import { buildMetadata } from "../../lib/seo";
 
 const seoData = buildMetadata({
   title: "Projects",
-  description: "A validated list of projects built and shipped from the site content layer.",
+  description: "Selected projects focused on product thinking, platform architecture, and high-leverage engineering work.",
   path: "/projects",
 });
 
@@ -27,7 +27,7 @@ export default function ProjectsPage() {
       currentPath="/projects"
       eyebrow="Project index"
       title="Projects"
-      description="Validated project entries pulled from the shared content layer, sorted for a stable build output."
+      description="Case studies that explain the problem, the system behind it, and the decisions that made the work hold up."
     >
       {projects.length > 0 ? (
         <section className="section-grid">
