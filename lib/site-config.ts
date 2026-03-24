@@ -1,4 +1,4 @@
-export const SITE_URL = "https://webvinext2.dev"; // TODO: replace with real domain before deploy
+export const SITE_URL = "https://webvinext.dev"; // TODO: replace with real domain before deploy
 
 export const SITE_NAME = "GhandyIT";
 

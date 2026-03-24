@@ -1,6 +1,6 @@
-# webvinext2
+# webvinext
 
-`webvinext2` is a content-driven site built with Vinext, React App Router, and Cloudflare Workers. The repo includes a validated MDX content layer, route metadata, sitemap/robots support, and a Workers-aligned local preview/deploy workflow.
+`webvinext` is a content-driven site built with Vinext, React App Router, and Cloudflare Workers. The repo includes a validated MDX content layer, route metadata, sitemap/robots support, and a Workers-aligned local preview/deploy workflow.
 
 ## Prerequisites
 
@@ -23,10 +23,10 @@ npm run preview
 npm run deploy
 ```
 
-- `npm run dev` starts local development
-- `npm run check` runs typecheck and tests
-- `npm run build` produces the production output used by preview and deploy
-- `npm run preview` runs the built app through the local Workers-aligned preview flow
+- `npm run dev` starts local development (runs `content:generate` then `vp dev`)
+- `npm run check` runs typecheck and tests (each runs `content:generate` first)
+- `npm run build` produces the production output used by preview and deploy (runs `content:generate` then `vp build`)
+- `npm run preview` runs the built app through the local Workers-aligned preview flow (runs `content:generate` then `vp preview`)
 - `npm run deploy` publishes the Worker with Wrangler
 
 ## Local Development
@@ -71,7 +71,7 @@ After preview starts, verify the publishable surface:
 - `/blog`
 - `/blog/getting-started-with-vinext`
 - `/projects`
-- `/projects/webvinext2-site`
+- `/projects/webvinext-site`
 - `/sitemap.xml`
 - `/robots.txt`
 - `/favicon.svg`
@@ -105,7 +105,7 @@ The documented deploy flow has been verified against the current runtime output.
 
 ## Production URL Configuration
 
-`SITE_URL` in `lib/site-config.ts` is a build-time site setting, not a default Wrangler binding. Update it before production deploy so canonicals, `og:url`, sitemap entries, and robots output point at the real domain instead of the placeholder `https://webvinext2.dev`.
+`SITE_URL` in `lib/site-config.ts` is a build-time site setting, not a default Wrangler binding. Update it before production deploy so canonicals, `og:url`, sitemap entries, and robots output point at the real domain instead of the placeholder `https://webvinext.dev`.
 
 ## Cloudflare Runtime Expectations
 
@@ -125,16 +125,11 @@ Repo-local skill guidance lives in `.agents/README.md`. Those skills are workflo
 - Locked skill versions live in `skills-lock.json`
 - External skills remain optional; the site must build and deploy without them
 
-To add an optional skill:
-
-```bash
-npx skills add <source>
-```
-
-Or install it into the repo-local skills directory and update `skills-lock.json`. See `.agents/README.md` for the current skill inventory, precedence rules, and project-local conventions.
+See `.agents/README.md` for the current skill inventory, precedence rules, skill installation instructions, and project-local conventions.
 
 ## Release Notes
-
 - Keep commands in this README aligned with `package.json`
 - Keep Worker/runtime details aligned with `wrangler.jsonc`, `vite.config.ts`, and `worker/index.ts`
-- If preview or deploy behavior changes, update the docs in the same task as the workflow change
+- Keep skill documentation in `.agents/README.md` up to date
+- When changing scripts, runtime, or skills, update the corresponding documentation
+- Before committing, check for stale naming in active docs

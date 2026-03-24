@@ -1,6 +1,6 @@
 # OpenCode Skills - Project Scope
 
-This document defines the OpenCode skill structure for the webvinext2 project. Skills are **workflow accelerators** that extend agent capabilities — they are **NOT runtime dependencies** and the site functions without them.
+This document defines the OpenCode skill structure for the webvinext project. Skills are **workflow accelerators** that extend agent capabilities — they are **NOT runtime dependencies** and the site functions without them.
 
 ## Skill Categories
 
@@ -13,13 +13,13 @@ These are available by default in OpenCode agents:
 | `frontend-ui-ux` | Design system, component architecture | Building React components, styling, accessibility |
 | `git-master` | Git workflows, commit conventions | Branching strategies, PR workflows, conflict resolution |
 | `dev-browser` | Dev server debugging | Inspecting running dev servers, debugging hot reload issues |
+| `find-skills` | Discover and install additional skills | Finding and installing skills from the open agent skills ecosystem |
 
 ### ⚡ Priority Skills (User-Installed)
 These are installed and take precedence over built-in defaults:
 
 | Skill | Source | Purpose |
 |-------|--------|---------|
-| `find-skills` | `.agents/skills/find-skills` | Discover and install additional skills |
 
 ### 🌐 Project-Specific Skills (Locked via `skills-lock.json`)
 These are installed in `.agents/skills/` and locked for reproducibility:
@@ -100,4 +100,4 @@ The project builds and deploys without any skills installed. Skills only enhance
 
 ---
 
-*Last updated: 2026-03-18 | Task 6: Define project-scoped OpenCode skill structure*
+*Last updated: 2026-03-22 | Task: Update .agents/README.md to align with current webvinext project identity*
