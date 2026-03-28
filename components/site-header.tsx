@@ -12,7 +12,6 @@ export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {
           <span className="site-header__logo">
             <span className="site-header__brand-mark">{SITE_NAME}</span>
           </span>
-          <span className="site-header__path">workers-ready portfolio</span>
         </a>
 
         <ul className="site-header__links">

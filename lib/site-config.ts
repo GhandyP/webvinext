@@ -1,9 +1,9 @@
 export const SITE_URL = "https://webvinext.dev"; // TODO: replace with real domain before deploy
 
-export const SITE_NAME = "GhandyIT";
+export const SITE_NAME = "Ghandy";
 
 export const SITE_DESCRIPTION =
-  "Full-stack engineer building high-performance web systems, edge platforms, and AI-assisted workflows.";
+  "Complex Problem Solver | DevSecOps · AI · Infrastructure | Systems Builder";
 
 export const SITE_OG_IMAGE_PATH = "/og-default.svg";
 
@@ -28,17 +28,22 @@ export interface SocialLink {
 }
 
 export const SOCIAL_LINKS: readonly SocialLink[] = [
-  {
-    label: "GitHub",
-    href: "https://github.com/GhandyP",
-    icon: "github",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/martin-prieto-564253a9/",
-    icon: "linkedin",
-  },
-] as const;
+   {
+     label: "GitHub",
+     href: "https://github.com/GhandyP",
+     icon: "github",
+   },
+   {
+     label: "LinkedIn",
+     href: "https://www.linkedin.com/in/martin-prieto-564253a9/",
+     icon: "linkedin",
+   },
+   {
+     label: "X",
+     href: "https://x.com/Ghandyofmetal",
+     icon: "twitter",
+   },
+ ] as const;
 
 export const FOOTER_COPYRIGHT = `© ${new Date().getFullYear()} ${SITE_NAME}. All rights reserved.`;
 

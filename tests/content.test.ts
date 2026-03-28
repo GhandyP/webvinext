@@ -85,13 +85,121 @@ describe("content schemas", () => {
     expect(result.success).toBe(true);
   });
 
-  it("rejects about content missing description", () => {
-    const result = aboutSchema.safeParse({
-      title: "About",
-    });
-    expect(result.success).toBe(false);
-  });
-});
+   it("rejects about content missing description", () => {
+     const result = aboutSchema.safeParse({
+       title: "About",
+     });
+     expect(result.success).toBe(false);
+   });
+
+   describe("project schema new fields", () => {
+     it("accepts a project with category field", () => {
+       const result = projectSchema.safeParse({
+         title: "Test Project",
+         description: "A test project",
+         date: "2026-03-18T00:00:00.000Z",
+         status: "active",
+         stack: ["react"],
+         slug: "test-project",
+         category: "backend",
+       });
+       expect(result.success).toBe(true);
+     });
+
+     it("accepts a project with highlights field", () => {
+       const result = projectSchema.safeParse({
+         title: "Test Project",
+         description: "A test project",
+         date: "2026-03-18T00:00:00.000Z",
+         status: "active",
+         stack: ["react"],
+         slug: "test-project",
+         highlights: ["high performance", "scalable"],
+       });
+       expect(result.success).toBe(true);
+     });
+
+     it("accepts a project with architecture field", () => {
+       const result = projectSchema.safeParse({
+         title: "Test Project",
+         description: "A test project",
+         date: "2026-03-18T00:00:00.000Z",
+         status: "active",
+         stack: ["react"],
+         slug: "test-project",
+         architecture: "Microservices with API gateway",
+       });
+       expect(result.success).toBe(true);
+     });
+
+     it("accepts a project with challenges field", () => {
+       const result = projectSchema.safeParse({
+         title: "Test Project",
+         description: "A test project",
+         date: "2026-03-18T00:00:00.000Z",
+         status: "active",
+         stack: ["react"],
+         slug: "test-project",
+         challenges: ["Legacy system integration", "Performance optimization"],
+       });
+       expect(result.success).toBe(true);
+     });
+
+     it("accepts a project with outcome field", () => {
+       const result = projectSchema.safeParse({
+         title: "Test Project",
+         description: "A test project",
+         date: "2026-03-18T00:00:00.000Z",
+         status: "active",
+         stack: ["react"],
+         slug: "test-project",
+         outcome: "Increased throughput by 40%",
+       });
+       expect(result.success).toBe(true);
+     });
+
+     it("accepts a project without the new fields (omission)", () => {
+       const result = projectSchema.safeParse({
+         title: "Test Project",
+         description: "A test project",
+         date: "2026-03-18T00:00:00.000Z",
+         status: "active",
+         stack: ["react"],
+         slug: "test-project",
+       });
+       expect(result.success).toBe(true);
+     });
+
+     it("rejects project with invalid category type", () => {
+       const result = projectSchema.safeParse({
+         title: "Test Project",
+         description: "A test project",
+         date: "2026-03-18T00:00:00.000Z",
+         status: "active",
+         stack: ["react"],
+         slug: "test-project",
+         category: 123,
+       });
+       expect(result.success).toBe(false);
+     });
+
+     it("accepts project with valid category values", () => {
+       const validCategories = ["backend", "devops", "ai", "security", "fullstack"];
+       validCategories.forEach((category) => {
+         const result = projectSchema.safeParse({
+           title: "Test Project",
+           description: "A test project",
+           date: "2026-03-18T00:00:00.000Z",
+           status: "active",
+           stack: ["react"],
+           slug: "test-project",
+           category,
+         });
+         expect(result.success).toBe(true);
+       });
+     });
+   });
+ });
 
 describe("duplicate slug detection", () => {
     it("throws on duplicate slugs in a collection", async () => {
@@ -219,12 +327,12 @@ describe("content loaders", () => {
     it("includes project body content from mdx", async () => {
       const { loadProjects } = await import("../lib/content/loader.js");
       const projects = loadProjects();
-      expect(projects[0]?.body).toContain("## Goals");
+      expect(projects[0]?.body).toContain("## Problem");
     });
 
     it("includes about body content from mdx", async () => {
       const { loadAbout } = await import("../lib/content/loader.js");
       const about = loadAbout();
-      expect(about?.body).toContain("## Tech Stack");
+      expect(about?.body).toContain("## From Curiosity to Engineering");
     });
   });

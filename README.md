@@ -1,6 +1,6 @@
 # webvinext
 
-`webvinext` is a content-driven site built with Vinext, React App Router, and Cloudflare Workers. The repo includes a validated MDX content layer, route metadata, sitemap/robots support, and a Workers-aligned local preview/deploy workflow.
+`webvinext` is the portfolio site for Ghandy (Martín Prieto). The site's self-description is: "Solucionador de Problemas Complejos | DevSecOps · AI · Infraestructura | Constructor de Sistemas". The repo includes a validated MDX content layer, route metadata, sitemap/robots support, and a Workers-aligned local preview/deploy workflow.
 
 ## Prerequisites
 
@@ -69,13 +69,11 @@ After preview starts, verify the publishable surface:
 - `/`
 - `/about`
 - `/blog`
-- `/blog/getting-started-with-vinext`
+- `/blog/[slug]`
 - `/projects`
-- `/projects/webvinext-site`
+- `/projects/[slug]`
 - `/sitemap.xml`
 - `/robots.txt`
-- `/favicon.svg`
-- `/og-default.svg`
 
 Preview is the local verification step for the built Worker output. In the current repo, the preview flow is powered by `vp preview`, and the production deploy step consumes the built Worker output that Wrangler sees through the generated deploy config.
 

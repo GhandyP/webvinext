@@ -25,12 +25,11 @@ export default function ProjectsPage() {
   return (
     <PageShell
       currentPath="/projects"
-      eyebrow="Project index"
       title="Projects"
       description="Case studies that explain the problem, the system behind it, and the decisions that made the work hold up."
     >
       {projects.length > 0 ? (
-        <section className="section-grid">
+        <section className="section-grid section-grid--cards">
           {projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}

@@ -40,7 +40,7 @@ export function PageShell({
                 <h1 className={`page-title${isHome ? " page-title--home" : " page-title--inner"}`}>
                   {isHome ? (
                     <>
-                      Build the <span className="page-title__accent">visible layer</span>
+                      Hi, I'm <span className="page-title__accent">Ghandy</span>
                     </>
                   ) : (
                     title
@@ -54,17 +54,18 @@ export function PageShell({
                 <>
                   <div className="page-hero__actions">
                     <a className="button" href="/projects">
-                      Inspect projects
+                      View my projects
                     </a>
-                    <a className="button-secondary" href="/blog">
-                      Read build notes
+                    <a className="button-secondary" href="https://x.com/Ghandyofmetal">
+                      Contact me
                     </a>
                   </div>
 
                   <div className="page-hero__chips">
-                    <span className="info-chip">Vinext app router</span>
-                    <span className="info-chip">Cloudflare workers</span>
-                    <span className="info-chip">content-driven UI</span>
+                    <span className="info-chip">DevSecOps</span>
+                    <span className="info-chip">AI</span>
+                    <span className="info-chip">Infrastructure</span>
+                    <span className="info-chip">Backend</span>
                   </div>
                 </>
               ) : null}
@@ -72,15 +73,15 @@ export function PageShell({
 
             {isHome ? (
               <aside className="page-hero__meta" aria-label="Homepage summary">
-                <p className="page-hero__meta-title">Ship fast, keep the surface intentional.</p>
+                <p className="page-hero__meta-title">Ideas don't survive without infrastructure.</p>
                 <p className="page-hero__meta-copy">
-                  This portfolio pairs a content-driven architecture with a more expressive visual system,
-                  so the homepage feels authored instead of assembled.
+                  Complex problem solver at the intersection of backend, infrastructure,
+                  DevSecOps, artificial intelligence, and cybersecurity.
                 </p>
                 <div className="page-hero__chips">
-                  <span className="info-chip">responsive shell</span>
-                  <span className="info-chip">shared MDX layer</span>
-                  <span className="info-chip">workers deploy path</span>
+                    <span className="info-chip">Python · Go · Rust</span>
+                    <span className="info-chip">Terraform · Kubernetes</span>
+                  <span className="info-chip">Cloudflare · AWS</span>
                 </div>
               </aside>
             ) : null}

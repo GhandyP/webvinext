@@ -30,7 +30,7 @@ export default function HomePage() {
   return (
     <PageShell
       currentPath="/"
-      eyebrow="Available for focused builds"
+      eyebrow="Available for complex projects"
       title={SITE_NAME}
       description={SITE_DESCRIPTION}
     >
@@ -46,7 +46,7 @@ export default function HomePage() {
 
           <article className="hero-stat">
             <div className="hero-stat__meta">
-              <span className="hero-stat__label">build notes</span>
+              <span className="hero-stat__label">technical notes</span>
               <span className="hero-stat__signal" aria-hidden="true" />
             </div>
             <p className="hero-stat__value">{allPosts.length}</p>
@@ -62,11 +62,10 @@ export default function HomePage() {
         </div>
 
         <article className="cta-card">
-          <p className="cta-card__title">Signal over clutter.</p>
-          <p className="cta-card__copy">
-            This homepage keeps the content model intact but upgrades the presentation with a more
-            deliberate hierarchy, stronger cards, and a clearer editorial rhythm.
-          </p>
+          <p className="cta-card__title">Ideas don't survive without infrastructure. I fix what others can't.</p>
+           <p className="cta-card__copy">
+             I design architectures that scale, automate what others do manually, and solve problems others consider lost causes. Backend, infrastructure, security, and artificial intelligence converge in every project.
+           </p>
         </article>
       </section>
 

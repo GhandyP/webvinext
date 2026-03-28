@@ -25,12 +25,11 @@ export default function BlogIndexPage() {
   return (
     <PageShell
       currentPath="/blog"
-      eyebrow="Writing"
       title="Blog"
       description="Writing that connects platform decisions, delivery habits, edge tooling, and the lessons behind real builds."
     >
       {posts.length > 0 ? (
-        <section className="section-grid">
+        <section className="section-grid section-grid--cards">
           {posts.map((post) => (
             <BlogCard key={post.slug} post={post} />
           ))}

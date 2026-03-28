@@ -14,7 +14,9 @@ export function ProjectCard({ project, href = `/projects/${project.slug}` }: Pro
         <div className="project-card__badges">
           <span className={statusClass}>{project.status}</span>
 
-          {project.featured ? <span className="project-card__featured">featured signal</span> : null}
+          {project.category ? <span className="tag project-card__category">{project.category}</span> : null}
+
+          {project.featured ? <span className="project-card__featured">featured</span> : null}
         </div>
       </div>
 
@@ -23,6 +25,14 @@ export function ProjectCard({ project, href = `/projects/${project.slug}` }: Pro
       </h2>
 
       <p className="project-card__description">{project.description}</p>
+
+      {project.highlights && project.highlights.length > 0 ? (
+        <ul className="project-card__highlights">
+          {project.highlights.slice(0, 3).map((h, index) => (
+            <li className={`highlight-item highlight-item--${index + 1}`} key={h}>{h}</li>
+          ))}
+        </ul>
+      ) : null}
 
       <ul className="project-card__tags">
         {project.stack.map((item) => (

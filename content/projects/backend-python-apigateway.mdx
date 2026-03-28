@@ -1,0 +1,34 @@
+---
+title: "Backend Python + API Gateway"
+description: "Evolution from monolith to API Gateway architecture in Python to demonstrate system redesign capability when growth demands it."
+date: "2026-03-23T00:00:00.000Z"
+status: "wip"
+stack:
+  - python
+  - api-gateway
+featured: false
+slug: "backend-python-apigateway"
+category: "backend"
+highlights:
+  - "Evolution from monolithic to API Gateway architecture"
+  - "Design for future growth and scalability"
+  - "Capability to redesign existing systems"
+  - "Focus on maintainability and controlled evolution"
+architecture: "Python backend system transitioning from monolith to API Gateway architecture, with specialized services behind a routing and management layer"
+challenges:
+  - "Identifying appropriate service boundaries during refactoring"
+  - "Maintaining compatibility during transition from monolith to distributed services"
+  - "Designing gateway pattern to handle cross-cutting concerns (authentication, logging, rate limiting)"
+outcome: "Demonstrated capability to evolve existing architectures toward more scalable patterns, reducing technical risk and preparing the system for future growth"
+---
+## Problem
+
+Successful systems often begin as simple monoliths but, as complexity and traffic grow, they run into limits in scalability, maintainability, and development speed. Teams need to evolve these architectures without stopping value delivery.
+
+## Approach
+
+I started with an existing monolithic Python backend and designed a gradual transition toward an API Gateway architecture. This involved identifying service boundaries, extracting functionality into independent services behind a gateway layer that handles cross-cutting concerns, and establishing deployment patterns that support incremental evolution.
+
+## Outcome
+
+The result is a backend system that demonstrates the ability to redesign existing architectures for future growth. The API Gateway pattern provides a clear path to scale services independently, improve maintainability, and reduce the technical risk associated with large monoliths.

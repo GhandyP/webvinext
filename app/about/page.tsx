@@ -37,14 +37,13 @@ export default function AboutPage() {
   return (
     <PageShell
       currentPath="/about"
-      eyebrow="Background"
       title={about?.title ?? "About"}
       description={about?.description ?? "This route is wired to the shared content layer, but no about entry is currently published."}
     >
       {about && Content ? (
-        <section className="surface rich-copy">
+        <div className="section-stack">
           <Content components={mdxComponents} />
-        </section>
+        </div>
       ) : (
         <section className="surface-raised empty-state muted">
           `content/about.mdx` is missing, so there is no published about entry to render yet.

@@ -44,6 +44,11 @@ export const projectSchema = z.object({
       /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
       "Slug must be lowercase alphanumeric with hyphens"
     ),
+  category: z.string().optional(),
+  highlights: z.array(z.string()).optional(),
+  architecture: z.string().optional(),
+  challenges: z.array(z.string()).optional(),
+  outcome: z.string().optional(),
 });
 
 export interface Project extends z.infer<typeof projectSchema> {

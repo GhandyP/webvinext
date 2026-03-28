@@ -10,11 +10,19 @@ stack:
   - openai-api
 featured: true
 slug: "clawdbot"
+category: "backend"
+highlights:
+  - "Reduced manual handling for repeatable operational requests"
+  - "Improved consistency through explicit command flows"
+  - "Increased traceability with explainable guided actions"
+  - "Built operational layer with faster execution and clearer history"
+architecture: "TypeScript/Node.js assistant running on Cloudflare Workers with OpenAI API integration for natural language understanding"
+challenges:
+  - "Balancing deterministic command paths with natural language flexibility"
+  - "Ensuring safe defaults for automated operational actions"
+  - "Creating reusable runbooks that maintain context across steps"
+outcome: "More reliable operational layer with faster handling for repeatable tasks, clearer execution history, and reduced maintenance friction"
 ---
-
-Clawdbot is built around a simple idea: operational work should not depend on someone manually repeating the same playbook over and over again.
-
-The project turns recurring support and maintenance routines into guided flows that can explain, execute, and document each step.
 
 ## Problem
 
@@ -22,14 +30,14 @@ Operational requests were being handled manually across channels, which created 
 
 ## Approach
 
-I focused on deterministic command paths, safe defaults, and reusable runbooks so the assistant could accelerate common requests without becoming unpredictable.
+I built Clawdbot around deterministic command paths, safe defaults, and reusable runbooks so the assistant could accelerate common requests without becoming unpredictable. The project turns recurring support and maintenance routines into guided flows that can explain, execute, and document each step.
+
+## Outcome
+
+The result is a more reliable operational layer: faster handling for repeatable tasks, clearer execution history, and less friction for the people maintaining the system.
 
 ## Proof Points
 
 - Reduced the amount of manual handling needed for repeatable operational requests
 - Improved consistency by turning scattered playbooks into explicit command flows
 - Increased traceability by making each guided action easier to explain and review
-
-## Outcome
-
-The result is a more reliable operational layer: faster handling for repeatable tasks, clearer execution history, and less friction for the people maintaining the system.

@@ -11,26 +11,28 @@ stack:
 featured: true
 repositoryUrl: "https://github.com/GhandyP/webvinext"
 slug: "webvinext-site"
+category: "fullstack"
+highlights:
+  - "Rebuilt personal site on Cloudflare Workers for better runtime alignment"
+  - "Implemented validated MDX content layer for structured publishing"
+  - "Strengthened editorial visual language and platform architecture integration"
+  - "Fixed Worker preview compatibility for reliable development workflow"
+architecture: "Vinext-based React App Router with MDX content generation, deployed to Cloudflare Workers with asset and image bindings"
+challenges:
+  - "Aligning preview behavior with production Worker runtime"
+  - "Balancing content model structure with publishing flexibility"
+  - "Integrating visual design with platform architecture as a unified product surface"
+outcome: "Stronger base for ongoing writing, case studies, and product experiments with reliable preview/deploy workflow"
 ---
 
-This project is the current evolution of my personal site: a portfolio platform that combines content publishing, project storytelling, and a Worker-friendly delivery model.
+## Problem
 
-It takes the strongest ideas from the previous Astro version - clear positioning, structured writing, and a project-first narrative - and rebuilds them on a runtime that is better aligned with how I want to ship and iterate.
+The previous portfolio lacked a durable content model and did not communicate technical depth clearly enough. It acted more like a static brochure than a platform that reflects current engineering capability.
 
-## Goals
+## Approach
 
-- Replace placeholder positioning with a clearer engineering narrative
-- Keep the content model explicit so new posts and projects stay easy to publish
-- Make preview, build, and deployment behavior reliable in the Cloudflare Worker runtime
-- Treat visual design and platform architecture as parts of the same product surface
-
-## What Changed
-
-- Reworked the site around generated MDX modules instead of runtime frontmatter parsing
-- Strengthened the homepage, shell, and cards with a more deliberate editorial visual language
-- Kept validation in the content layer so publishing stays structured instead of ad hoc
-- Reduced platform friction by fixing Worker preview compatibility
+I rebuilt the site around generated MDX modules instead of runtime frontmatter parsing, strengthened the editorial visual language, kept validation in the content layer for structured publishing, and fixed Worker preview compatibility to reduce platform friction.
 
 ## Outcome
 
-The result is not just a nicer portfolio. It is a stronger base for ongoing writing, case studies, and future product experiments.
+The result is not just a nicer portfolio. It is a stronger base for ongoing writing, case studies, and future product experiments with a reliable preview/deploy workflow and clearer engineering narrative.
