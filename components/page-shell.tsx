@@ -23,9 +23,10 @@ export function PageShell({
 
   return (
     <div className="page-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <SiteHeader {...headerProps} />
 
-      <main className="page-shell__main">
+      <main id="main-content" className="page-shell__main" tabIndex={-1}>
         {title || description || eyebrow ? (
           <section className={`page-hero${isHome ? " page-hero--home" : ""}`}>
             <div className="page-hero__grid">
@@ -54,36 +55,43 @@ export function PageShell({
                 {isHome ? (
                   <>
                     <div className="page-hero__actions">
-                      <a className="button" href="/projects">
-                        View my projects
-                      </a>
+                      <a className="button" href="#working-example">See a working example</a>
                       <a className="button-secondary" href="https://x.com/Ghandyofmetal">
-                        Contact me
+                        Let’s talk
                       </a>
-                    </div>
-
-                    <div className="page-hero__chips">
-                      <span className="info-chip">DevSecOps</span>
-                      <span className="info-chip">AI</span>
-                      <span className="info-chip">Infrastructure</span>
-                      <span className="info-chip">Backend</span>
+                      <a className="section-link" href="/about">How I work</a>
                     </div>
                   </>
                 ) : null}
               </div>
 
               {isHome ? (
-                <aside className="page-hero__meta" aria-label="Homepage summary">
-                  <p className="page-hero__meta-title">Ideas don't survive without infrastructure.</p>
+                <aside className="page-hero__meta home-perspectives" aria-labelledby="perspectives-title">
+                  <h2 id="perspectives-title" className="page-hero__meta-title">More than one perspective</h2>
                   <p className="page-hero__meta-copy">
-                    Complex problem solver at the intersection of backend, infrastructure,
-                    DevSecOps, artificial intelligence, and cybersecurity.
+                    What matters becomes clearer when the pieces are connected.
                   </p>
-                  <div className="page-hero__chips">
-                    <span className="info-chip">Python · Go · Rust</span>
-                    <span className="info-chip">Terraform · Kubernetes</span>
-                    <span className="info-chip">Cloudflare · AWS</span>
-                  </div>
+                  <dl className="home-perspectives__list">
+                    <div>
+                      <dt>People</dt>
+                      <dd>What someone needs, understands, and experiences.</dd>
+                    </div>
+                    <div>
+                      <dt>Organization</dt>
+                      <dd>How goals, resources, and everyday work fit together.</dd>
+                    </div>
+                    <div>
+                      <dt>Technology</dt>
+                      <dd>Where software, data, and connected systems can help.</dd>
+                    </div>
+                    <div>
+                      <dt>Practice</dt>
+                      <dd>What can be built, maintained, and improved.</dd>
+                    </div>
+                  </dl>
+                  <p className="home-perspectives__note">
+                    Different lenses, not boxes for you to fit into.
+                  </p>
                 </aside>
               ) : null}
             </div>
