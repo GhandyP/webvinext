@@ -102,7 +102,7 @@ The product/UX direction and Bridges between perspectives composition are confir
 
 The user subsequently authorized a UI-only first slice with visual verification pending. Home, the shared shell, scoped styles, and regression tests are implemented in the working tree. The feature ledger records observed RED/GREEN, a passing 40-test suite, typecheck, build, and qualified independent candidate source checks. These are not visual quality or visitor-comprehension results.
 
-The remaining proof is native assessment/review with a supported explicit candidate scope and separately authorized rendered desktop/mobile verification. Neither has been completed or silently waived. Wider site changes are not implied by this first slice.
+The native readability/reliability review of the committed UI slice completed as approved, and its exact acknowledgement burned the review authority. That approval applies only to the frozen range ending at `b50a7932a65145ece47f7cfb1d8dd03843095a7c`, not later recordkeeping or rendered behavior. The remaining proof is separately authorized rendered desktop/mobile verification; it has not been completed or silently waived. Wider site changes are not implied by this first slice.
 
 Published MDX, content schemas, dependencies, runtime configuration, the other workstream's blueprint, and deployment were not changed for this slice. No commit, push, publication, or browser retry is implied.
 
