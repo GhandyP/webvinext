@@ -1,7 +1,7 @@
 import { NAV_ITEMS, SITE_NAME } from "../lib/site-config";
 
 interface SiteHeaderProps {
-  currentPath?: string;
+  currentPath?: string | null;
 }
 
 export function SiteHeader({ currentPath = "/" }: SiteHeaderProps) {

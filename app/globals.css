@@ -83,7 +83,7 @@ body::after {
   animation: ambientDrift 18s ease-in-out infinite alternate;
 }
 
-main.container {
+.container {
   position: relative;
   z-index: 1;
   width: 100%;
@@ -187,6 +187,11 @@ h4 {
 }
 
 .page-shell {
+  display: grid;
+  gap: 1.6rem;
+}
+
+.page-shell__main {
   display: grid;
   gap: 1.6rem;
 }
@@ -1131,7 +1136,7 @@ h4 {
 }
 
 @media (min-width: 768px) {
-  main.container {
+  .container {
     padding-inline: 1.75rem;
   }
 

@@ -3,6 +3,7 @@ import { PageShell } from "../components/page-shell";
 export default function NotFoundPage() {
   return (
     <PageShell
+      currentPath={null}
       eyebrow="404"
       title="Route not found"
       description="The path or content entry you asked for is missing, unpublished, or no longer available."
