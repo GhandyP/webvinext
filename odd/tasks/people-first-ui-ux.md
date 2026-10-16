@@ -48,11 +48,11 @@ These are execution boundaries, not extra user claims:
 
 | ID | Specs | Route | Status | Commit / evidence |
 |---|---|---|---|---|
-| T1 | S1–S6 | inline | done | RED: 4 fail / 1 pass, exit 1; GREEN: 5/5 pass, exit 0; source whitespace/readback passed; no commit authorized |
-| T2 | S1–S6 | inline | pending | Own checks passed; after T5, assess the newly committed range without untracked files; native approval remains absent |
-| T3 | S1–S6 | gentle-ai-verify | done | Candidate source/typecheck and 8 tests passed; exact hashes/parent spot check passed; scope incident recorded and owner-authorized cleanup completed; no visual/native approval |
+| T1 | S1–S6 | inline | done | RED: 4 fail / 1 pass; GREEN: 5/5; own checks passed; work-unit commit 818c10abbf5cea3c545db40ea8bbd18937935995 |
+| T2 | S1–S6 | inline | blocked | Own checks passed; committed-range ASSESS also requires explicit untracked declaration; no candidate/approval, no further retry |
+| T3 | S1–S6 | gentle-ai-verify | done | Source/typecheck/8 tests and exact-hash spot check passed for commit 818c10a; scope incident/cleanup recorded; no visual/native approval |
 | T4 | S2, S5–S6 | external proof | blocked | Awaiting an explicitly authorized rendered-preview path; user chose visual verification pending |
-| T5 | S6–S7 | inline | in_progress | Commit only the verified UI unit, its tests and owned documentation; exclude other workstreams and generated decision artifacts |
+| T5 | S6–S7 | inline | done | 818c10abbf5cea3c545db40ea8bbd18937935995: feat(ui): connect the people-first home experience; 7 owned files, no push/deploy |
 
 ## Log
 
@@ -147,3 +147,7 @@ This resolves the temporary-directory disposition, not retroactive authorization
 
 ### L17 — New authorization and commit scope
 User, verbatim: "continua con el plan y crear el commit". The four source/test hashes still match the tested candidate, the index was empty, and `git diff --check` passed. Preserve the current non-default branch and commit only Home, shared shell, scoped CSS, its regression tests, PRODUCT.md, the owned UX brief and this ledger. Exclude `.codegraph/`, `.impeccable/`, the separate profile blueprint and its ledger. Remove Markdown hyperlinks that incorrectly make this standalone unit depend on the other workstream's untracked draft; retain its optional contextual locator as plain text. Native assessment may use the new committed range after the commit; do not retry the old untracked candidate or infer review consent. Rendered proof remains deferred.
+
+### L18 — Observed work-unit commit and committed-range assessment
+`git commit -m "feat(ui): connect the people-first home experience"` exited 0 and created `818c10abbf5cea3c545db40ea8bbd18937935995` on the existing non-default branch. Exactly 7 owned files were included (703 additions, 78 deletions). Source/test bytes still match the verified candidate. Product/brief links were checked against files actually in the index, not the unrelated local draft; 8 local links passed. The coherent unit exceeds the planning line heuristic; no PR or delivery shape was requested or created.
+A fresh ASSESS of committed range `91271c3ac0c9b396d5a17ed4b5d5fc5c3a94d606..818c10abbf5cea3c545db40ea8bbd18937935995`, with `committedOnly: true`, still returned unassessable: untracked files require explicit declaration. This produced no candidate or approval. Keep the independent high-risk source evidence already obtained for identical bytes; do not rerun it or invent a native continuation. T2 stays blocked, and T4 remains deliberately deferred. The existing blueprint/ledger and generated artifacts remain untracked and untouched. A small documentation checkpoint records this observed commit identity and proof boundary; no push, deploy or runtime change is authorized.
