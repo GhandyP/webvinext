@@ -81,7 +81,7 @@ Preview is the local verification step for the built Worker output. In the curre
 
 Before a real deploy:
 
-1. Replace the placeholder site domain in `lib/site-config.ts`.
+1. Confirm `SITE_URL` in `lib/site-config.ts` matches the custom domain in `wrangler.jsonc`.
 2. Run `npm run check`.
 3. Run `npm run build`.
 4. Validate the Worker package in dry-run mode.
@@ -103,7 +103,19 @@ The documented deploy flow has been verified against the current runtime output.
 
 ## Production URL Configuration
 
-`SITE_URL` in `lib/site-config.ts` is a build-time site setting, not a default Wrangler binding. Update it before production deploy so canonicals, `og:url`, sitemap entries, and robots output point at the real domain instead of the placeholder `https://webvinext.dev`.
+The canonical production URL is **https://ghandy.dev**. `SITE_URL` in `lib/site-config.ts` is a build-time setting, not a Wrangler binding. Canonicals, `og:url`, sitemap entries, and robots output use this origin. `wrangler.jsonc` attaches the Worker to `ghandy.dev` as a Custom Domain; deploying provisions its DNS record and certificate.
+
+### Redirect www to the canonical domain
+
+The `www.ghandy.dev` redirect is managed separately in Cloudflare, not in the Worker:
+
+- Add a proxied `A` record for `www.ghandy.dev` pointing to the originless placeholder `192.0.2.0`.
+- Add a Single Redirect with expression `http.host eq "www.ghandy.dev"`.
+- Use dynamic target `concat("https://ghandy.dev", http.request.uri.path)`, status **301**, and preserve the query string.
+
+This redirects both HTTP and HTTPS requests while preserving paths and query parameters. Do not replace unrelated DNS records or redirect rules. See [Cloudflare Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/#redirect-between-www-and-root-domain).
+
+After deployment, verify `https://ghandy.dev/`, `/robots.txt`, and `/sitemap.xml`, then confirm that `https://www.ghandy.dev/blog?source=www` redirects to `https://ghandy.dev/blog?source=www`.
 
 ## Cloudflare Runtime Expectations
 
