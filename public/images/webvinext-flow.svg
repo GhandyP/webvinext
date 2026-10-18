@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="380" viewBox="0 0 840 380" role="img" aria-labelledby="title description">
+  <title id="title">MDX source → generated content modules → Vinext/React App Router → Cloudflare Worker</title>
+  <desc id="description">The source is content/projects/webvinext-site.mdx. scripts/generate-mdx-content.mjs compiles it into a generated module exporting a compiled MDX component, frontmatter, and raw content. lib/content/loader.ts imports generated project modules and validates project metadata; the project route renders the content in the Vinext and React App Router. worker/index.ts provides the Cloudflare Worker entry and delegates application requests to Vinext’s App Router handler. The four visible stages abbreviate this repository-based path as MDX, Modules, App, and Worker.</desc>
+  <rect width="840" height="380" fill="#09090d" />
+  <path d="M28 90H812M28 290H812" stroke="#263042" stroke-width="1.5" />
+  <circle cx="800" cy="54" r="4" fill="#67e8f9" fill-opacity=".8" />
+  <circle cx="782" cy="54" r="2.5" fill="#8b5cf6" fill-opacity=".8" />
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+    <path d="M212 210H224" stroke="#67e8f9" />
+    <path d="m220 204 7 6-7 6" stroke="#67e8f9" />
+    <path d="M422 210H434" stroke="#8b5cf6" />
+    <path d="m430 204 7 6-7 6" stroke="#8b5cf6" />
+    <path d="M632 210H644" stroke="#67e8f9" />
+    <path d="m640 204 7 6-7 6" stroke="#67e8f9" />
+  </g>
+
+  <g>
+    <rect x="20" y="140" width="190" height="140" rx="24" fill="#151720" stroke="#67e8f9" stroke-opacity=".65" stroke-width="2" />
+    <path d="M42 140H188" stroke="#67e8f9" stroke-width="4" stroke-linecap="round" />
+    <text x="115" y="228" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.5">MDX</text>
+  </g>
+
+  <g>
+    <rect x="230" y="140" width="190" height="140" rx="24" fill="#151720" stroke="#8b5cf6" stroke-opacity=".7" stroke-width="2" />
+    <path d="M252 140H398" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" />
+    <text x="325" y="228" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="42" font-weight="700" letter-spacing="-1.5">Modules</text>
+  </g>
+
+  <g>
+    <rect x="440" y="140" width="190" height="140" rx="24" fill="#151720" stroke="#67e8f9" stroke-opacity=".65" stroke-width="2" />
+    <path d="M462 140H608" stroke="#67e8f9" stroke-width="4" stroke-linecap="round" />
+    <text x="535" y="228" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="44" font-weight="700" letter-spacing="-1.5">App</text>
+  </g>
+
+  <g>
+    <rect x="650" y="140" width="190" height="140" rx="24" fill="#151720" stroke="#8b5cf6" stroke-opacity=".7" stroke-width="2" />
+    <path d="M672 140H818" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" />
+    <text x="745" y="228" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="42" font-weight="700" letter-spacing="-1.5">Worker</text>
+  </g>
+</svg>

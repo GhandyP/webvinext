@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620" role="img" aria-labelledby="title description">
+  <title id="title">Four perspectives around one question</title>
+  <desc id="description">People, Organization, Technology, and Practice connect around the question, “What are you trying to make sense of?” This explanatory map presents no client research or results.</desc>
+  <rect width="800" height="620" fill="#09090d" />
+  <path d="M24 78H776M24 548H776" stroke="#263042" stroke-width="1.5" />
+  <circle cx="400" cy="312" r="190" fill="none" stroke="#67e8f9" stroke-opacity=".09" stroke-width="1.5" />
+  <circle cx="400" cy="312" r="222" fill="none" stroke="#8b5cf6" stroke-opacity=".08" stroke-width="1.5" stroke-dasharray="3 11" />
+
+  <text x="32" y="55" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="34" font-weight="700" letter-spacing="-1.1">One question. Four perspectives.</text>
+
+  <!-- Four direct connections make the question the shared center. -->
+  <path d="M400 184V235" fill="none" stroke="#67e8f9" stroke-opacity=".8" stroke-width="3" />
+  <path d="M296 309H303" fill="none" stroke="#8b5cf6" stroke-opacity=".85" stroke-width="3" />
+  <path d="M504 309H497" fill="none" stroke="#67e8f9" stroke-opacity=".8" stroke-width="3" />
+  <path d="M400 426V381" fill="none" stroke="#8b5cf6" stroke-opacity=".85" stroke-width="3" />
+  <circle cx="400" cy="208" r="5" fill="#67e8f9" />
+  <circle cx="299.5" cy="309" r="4" fill="#8b5cf6" />
+  <circle cx="500.5" cy="309" r="4" fill="#67e8f9" />
+  <circle cx="400" cy="404" r="5" fill="#8b5cf6" />
+
+  <g>
+    <rect x="262" y="102" width="276" height="82" rx="20" fill="#151720" stroke="#67e8f9" stroke-opacity=".55" stroke-width="1.5" />
+    <path d="M282 102H518" stroke="#67e8f9" stroke-width="3" stroke-linecap="round" />
+    <text x="400" y="155" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="34" font-weight="700">People</text>
+  </g>
+
+  <g>
+    <rect x="20" y="263" width="276" height="92" rx="20" fill="#151720" stroke="#8b5cf6" stroke-opacity=".58" stroke-width="1.5" />
+    <path d="M40 263H276" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round" />
+    <text x="158" y="322" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="32" font-weight="700" letter-spacing="-.5">Organization</text>
+  </g>
+
+  <g>
+    <rect x="504" y="263" width="276" height="92" rx="20" fill="#151720" stroke="#67e8f9" stroke-opacity=".55" stroke-width="1.5" />
+    <path d="M524 263H760" stroke="#67e8f9" stroke-width="3" stroke-linecap="round" />
+    <text x="642" y="322" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="32" font-weight="700" letter-spacing="-.5">Technology</text>
+  </g>
+
+  <g>
+    <rect x="262" y="426" width="276" height="82" rx="20" fill="#151720" stroke="#8b5cf6" stroke-opacity=".58" stroke-width="1.5" />
+    <path d="M282 426H518" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round" />
+    <text x="400" y="479" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="34" font-weight="700">Practice</text>
+  </g>
+
+  <g>
+    <rect x="303" y="235" width="194" height="146" rx="24" fill="#1d1f2d" stroke="#67e8f9" stroke-opacity=".78" stroke-width="2" />
+    <path d="M324 255H368" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" />
+    <text x="400" y="294" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="30" font-weight="700">What are you</text>
+    <text x="400" y="324" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="30" font-weight="700">trying to make</text>
+    <text x="400" y="354" text-anchor="middle" fill="#f5f7fb" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="30" font-weight="700">sense of?</text>
+  </g>
+
+  <text x="400" y="593" text-anchor="middle" fill="#aeb8ca" font-family="Manrope, Inter, Segoe UI, sans-serif" font-size="28" font-weight="600">Explanatory map · not client evidence</text>
+</svg>

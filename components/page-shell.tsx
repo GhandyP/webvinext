@@ -71,6 +71,16 @@ export function PageShell({
                   <p className="page-hero__meta-copy">
                     What matters becomes clearer when the pieces are connected.
                   </p>
+                  <figure className="home-perspectives__figure">
+                    <img
+                      src="/images/home-perspectives.svg"
+                      width={800}
+                      height={620}
+                      alt="People, Organization, Technology, and Practice connect around the question: What are you trying to make sense of?"
+                      decoding="async"
+                    />
+                    <figcaption>A question viewed through four connected perspectives.</figcaption>
+                  </figure>
                   <dl className="home-perspectives__list">
                     <div>
                       <dt>People</dt>

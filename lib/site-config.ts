@@ -45,8 +45,6 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
    },
  ] as const;
 
-export const FOOTER_COPYRIGHT = `© ${new Date().getFullYear()} ${SITE_NAME}. All rights reserved.`;
-
 export const SITE_CONFIG = {
   url: SITE_URL,
   name: SITE_NAME,
@@ -56,6 +54,8 @@ export const SITE_CONFIG = {
   nav: NAV_ITEMS,
   social: SOCIAL_LINKS,
   footer: {
-    copyright: FOOTER_COPYRIGHT,
+    get copyright() {
+      return `© ${new Date().getFullYear()} ${SITE_NAME}. All rights reserved.`;
+    },
   },
 } as const;

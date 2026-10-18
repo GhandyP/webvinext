@@ -1,6 +1,7 @@
 import { notFound } from "vinext/shims/navigation";
 
 import { PageShell } from "../../../components/page-shell";
+import { WebVinextFlowFigure } from "../../../components/webvinext-flow-figure";
 import { getProjectBySlug, loadProjects, mdxComponents } from "../../../lib/content";
 import { buildMetadata } from "../../../lib/seo";
 
@@ -128,6 +129,8 @@ export default function ProjectDetailPage({ params }: ProjectPageProps) {
             <p className="muted">No public repository or demo link is published for this project yet.</p>
           )}
         </section>
+
+        {entry.slug === "webvinext-site" ? <WebVinextFlowFigure variant="detail" /> : null}
 
         {entry.architecture ? (
           <section className="surface rich-copy detail-architecture">

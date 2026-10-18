@@ -1,6 +1,7 @@
 import { BlogCard } from "../components/blog-card";
 import { PageShell } from "../components/page-shell";
 import { ProjectCard } from "../components/project-card";
+import { WebVinextFlowFigure } from "../components/webvinext-flow-figure";
 import { loadBlogPosts, loadProjects } from "../lib/content";
 import { buildMetadata } from "../lib/seo";
 import { SITE_DESCRIPTION, SITE_NAME } from "../lib/site-config";
@@ -51,6 +52,8 @@ export default function HomePage() {
                 The work behind it is available to inspect, not just describe.
               </p>
             </div>
+
+            <WebVinextFlowFigure variant="home" />
 
             <dl className="home-evidence__details">
               <div>
