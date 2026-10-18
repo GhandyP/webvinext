@@ -26,11 +26,28 @@ Accepted risk: "El esquema puede resultar abstracto: debe acompañar el texto, n
 
 ### S6 — Authorized implementation and proof boundary
 The user selected: "Implementar UI, con validación visual pendiente"
-The option states: "No tocar el entorno local; ejecutar los checks disponibles y dejar el resultado explícitamente parcial hasta poder verificarlo visualmente."
+The earlier option states: "No tocar el entorno local; ejecutar los checks disponibles y dejar el resultado explícitamente parcial hasta poder verificarlo visualmente."
+Current verification authorization: "Probar el build existente, sin cambiar el entorno".
+Its offered scope is: "Levantar un preview local y usar el navegador. Si falla, informar el bloqueo sin corregir configuración ni dependencias."
 
 ### S7 — Explicit commit authorization
 User: "continua con el plan y crear el commit"
 This authorizes a local work-unit commit, not push, deployment, runtime repair, browser retries, or native review consent.
+
+### S8 — Read-only browser-startup diagnosis
+The user selected: "Diagnosticar el arranque de Chromium".
+The option states: "Investigación acotada y de solo lectura, sin instalar, cambiar configuración ni reintentar la UI. Propondré una corrección si la evidencia la justifica."
+
+### S9 — One traced startup and conditional visual checks
+The user selected: "Diagnóstico y, si arranca, prueba visual".
+The live question states: "¿Autorizás un único arranque diagnóstico de Chromium, con un máximo de 30 segundos para iniciar, logs dentro del proyecto y sin instalar ni cambiar código, configuración o dependencias?"
+The option states: "Si ese único arranque funciona, validar también el build existente en desktop y móvil. Sin reparaciones ni reintentos; cerrar los procesos al terminar."
+Only private diagnostic runner/log/capture artifacts and process-local diagnostic verbosity are prepared; application source and standing configuration remain unchanged.
+
+### S10 — Preview-first delivery authorization
+The user proposed: "ok que te parece este plan commitea y pushea los cambio y luego con el mcp de cloudflare lo publicas para actualizar la web y luego ves los cambios desde la misma web ya ublicada , que te parece el plan ?"
+After the proposed preview-first adjustment, the user authorized: "puedes usar brouser user ? si autoriso el flujo y ve t"
+The approved flow is relevant commits/push, Cloudflare preview, actual browser review, and production only if that review passes. Private diagnostic/unrelated files are excluded; browser/tool availability must be checked rather than claimed.
 
 ### Implementation constraints and checks
 These are execution boundaries, not extra user claims:
@@ -51,8 +68,13 @@ These are execution boundaries, not extra user claims:
 | T1 | S1–S6 | inline | done | RED: 4 fail / 1 pass; GREEN: 5/5; own checks passed; work-unit commit 818c10abbf5cea3c545db40ea8bbd18937935995 |
 | T2 | S1–S6 | inline/native | done | Own checks passed; review-de7e576b8d7ad1e2 approved for the frozen committed range; exact acknowledgement completed and authority burned; no rendered-proof claim |
 | T3 | S1–S6 | gentle-ai-verify | done | Source/typecheck/8 tests and exact-hash spot check passed for commit 818c10a; scope incident/cleanup recorded; no visual/native approval |
-| T4 | S2, S5–S6 | external proof | blocked | Awaiting an explicitly authorized rendered-preview path; user chose visual verification pending |
+| T4 | S2, S5–S6, S9 | conditional existing-build proof | blocked | Single traced startup failed before CDP response; preview never started, 0 pages/captures; needs another explicitly chosen proof path |
 | T5 | S6–S7 | inline | done | 818c10abbf5cea3c545db40ea8bbd18937935995: feat(ui): connect the people-first home experience; 7 owned files, no push/deploy |
+| T6 | S6, S8–S9 | inline traced startup | blocked | Authorized local trace exhausted; no further local startup/repair authorized; remote preview route is now tracked separately |
+| T7 | S10 | inline commit/push | in_progress | Commit only the owned ledger; UI already committed; push current feature branch without force; exclude private/unrelated artifacts |
+| T8 | S10 | Cloudflare preview | pending | Target app-router-cloudflare / ghandy.dev confirmed through MCP; verify safe upload capability without changing production |
+| T9 | S2, S5–S6, S10 | remote browser review | pending | Browser Use is not registered; check Cloudflare Browser Rendering before claiming a usable remote browser |
+| T10 | S10 | conditional production promotion | pending | Promote only a remotely verified passing preview; preserve current active version as rollback reference |
 
 ## Log
 
@@ -155,4 +177,54 @@ A fresh ASSESS of committed range `91271c3ac0c9b396d5a17ed4b5d5fc5c3a94d606..818
 ### L19 — Native review completed through offered authority
 User continuation, verbatim: "continua con el plan". After reconciling the full ledger/mirror, facade INSPECT with `untrackedScope: exclude` offered a fresh ordinary START for the exact committed seven-file slice. The eligible host resolved candidate consent; START created `review-de7e576b8d7ad1e2`, native tier medium, readability/reliability lenses. No source or runtime change occurred.
 The group forecast declared two model runs. Its first submission was refused at admission for multiple JSON objects: zero results admitted, no slot consumed. Fresh bound STATUS reoffered the slots; only fresh provider-bound single-slot generations were executed, with one-run forecasts each. Readability was admitted, then reliability's last admitted event closed the review as approved. Refused bytes were neither edited nor replayed.
-Fresh bound STATUS then offered the exact acknowledgement. Its returned result was `native-approved-acknowledgement-completed`, `authority: burned`, `burn_evidence: gentle-ai.review-acknowledged/v1`. No STATUS followed the burn. This proves approval only for frozen target `sha256:a41c37a5ea8ae81c4358982fe1aff038a2ea49522551f3ffc0ca6c0d387ae644`, through commit `b50a7932a65145ece47f7cfb1d8dd03843095a7c`, not later recordkeeping, rendered UI or delivery. T2 is done; T4 is the only remaining proof task and still requires a separately authorized visual path.
+Fresh bound STATUS then offered the exact acknowledgement. Its returned result was `native-approved-acknowledgement-completed`, `authority: burned`, `burn_evidence: gentle-ai.review-acknowledged/v1`. No STATUS followed the burn. This proves approval only for frozen target `sha256:a41c37a5ea8ae81c4358982fe1aff038a2ea49522551f3ffc0ca6c0d387ae644`, through commit `b50a7932a65145ece47f7cfb1d8dd03843095a7c`, not later recordkeeping, rendered UI or delivery. T2 is done; T4 was the only remaining proof task awaiting its separately authorized visual path.
+
+### L20 — Bounded visual-verification authorization
+The live user selection was "Probar el build existente, sin cambiar el entorno". It authorizes local preview and browser checks, not a rebuild, install, configuration/dependency edit or environment repair. Use only existing build/browser assets, keep all new artifacts/profiles/temp directories inside the project, and stop/report if the available preview/browser path fails. Do not reopen the burned native lineage. No rendered result is claimed before execution. The Engram authorization save timed out ambiguously before other actions ran; its result/mirror is unconfirmed and will not be blindly retried. Preserve this canonical local record and continue safe authorized work under the memory fallback.
+
+### L21 — Existing-build preview and browser batch started
+The existing server/client manifests are present and reference the previously built `index--zP-7jym.css` assets. The installed isolated tooling is a Python Playwright 1.64.0 target under `node_modules/.playwright-ui-recon`, with its bundled driver and Chromium revision 1248 already present; no install or repair is needed or attempted. One `pnpm exec vp preview --host 127.0.0.1 --port 4179 --strictPort` process reached ready state as monitor job-10, stop method `job_stop` for that owned job.
+One desktop/mobile browser batch is running as job-11. All new process-local HOME/cache/temp/download/profile/capture paths are inside `.impeccable/review/ui-visual-196tbf4f`; these do not change standing configuration. The browser uses only the installed private Python package/browsers. No rebuild, dependency/config edit or rendered result is claimed. Keep artifacts for inspection, stop the owned preview at completion, and report any failure without an automatic retry or environment repair.
+
+### L22 — Failed harness startup and explicit manual continuation
+Browser job-11 exited 1 before launching Chromium: the owned script was named `inspect.py`, which shadowed Python's standard-library `inspect` during Playwright/asyncio import. No page or screenshot was produced. Preview monitor job-10 later reached its 300-second limit and stopped; record that timeout as failure, not a visual pass.
+The user then explicitly requested "continua con el plan". This is a new manually requested attempt under the existing-build-only boundary, not an automatic restart or a runtime repair. The parent renamed only the owned private script to `verify_ui.py`, with a no-overwrite guard; the shadowing name is absent and all four verified source/test hashes still match. No project configuration, dependency, build or UI source changed. Prepare the corrected script before starting one new bounded preview/browser batch; do not repeat the already burned native review. Engram synchronization was unconfirmed at that transition after its earlier ambiguous timeout.
+
+### L23 — New manual preview invocation
+The corrected verification script is prepared before this new invocation. The existing-build preview was started once on the same port and command, as current monitor job-1 with a 300-second bound; readiness is pending at this record. Its stop method is `job_stop` on that exact current job. Only after its ready event may the corrected browser batch start. No alternative runtime, rebuild, installation, native-review call or source fix is authorized by this preparation.
+
+### L24 — Observed browser-launch failure; no rendered proof
+The new manual preview reached ready at `http://127.0.0.1:4179`. The corrected browser batch (current job-2) exited 1 after 26 seconds: `BrowserType.launch: Timeout 20000ms exceeded.` The report contains zero route results and zero screenshots; no page was visited and no UI assertion, visual quality, contrast/reflow, navigation or comprehension result may be claimed. This is a browser-startup blocker, not a reproduced website defect.
+The parent immediately stopped the exact owned preview monitor (current job-1). A single process-cleanup guard found reported Chromium PID 117402 already absent; no signal or further launch was needed. No browser restart, different binary/flags, installation, source/config/dependency change, rebuild or environment repair followed. Evidence is retained only in the owned `.impeccable/review/ui-visual-196tbf4f/report.json` and tool logs. T4 is blocked pending a specifically authorized diagnostic/alternative visual path or explicit deferral; the completed native review remains closed. Current local log updates are not a new UI commit.
+
+### L25 — Explicit diagnostic authorization
+The user selected "Diagnosticar el arranque de Chromium" with the read-only/no-install/no-config/no-UI-retry scope quoted in S8. Diagnose installed project-local assets and process/version metadata only. No new preview or browser session, alternate renderer, package install, environment repair, source change or native review action is authorized. Root cause is still unconfirmed at this transition. T4 stays blocked; T6 is the sole active task.
+
+### L26 — Read-only binary/linkage facts
+The installed manifest expects Chromium/headless-shell revision 1248, version 156.0.8078.4; that project-local binary is a real executable x86-64 ELF with matching host architecture and readable/executable permissions. The bundled Node is also an executable x86-64 ELF. Both `ldd` probes exited 0 without `not found` entries or stderr. Chromium `--version` exited 0 in 0.024s with `Google Chrome for Testing 156.0.8078.4`; bundled Node `--version` exited 0 in 0.006s with `v24.21.0`. These were version/linkage probes, not browser sessions or UI retries.
+This rules out an obvious missing executable, permission/architecture mismatch, or unresolved directly linked library in those checks. It does not establish full session startup, IPC/profile/sandbox behavior, resource availability under load, or a root cause. No installation, flags/configuration change or repair is justified from these facts. Remaining in-scope investigation is a bounded read-only map of artifacts already left by the failed run, not a new launch.
+
+### L27 — Existing-artifact mapping delegated
+The remaining evidence exceeds the parent's initial bounded read batch. Read-only explorer `mvdau8du-1-28k1` maps existing artifacts only under the owned verification directory, returning a short path-evidenced handoff. It has no shell/process/write assignment and must not follow outside symlinks or inspect cookie/storage databases. The parent does not duplicate that mapping. Its result was pending at that transition; root cause and visual proof were not claimed. No preview/browser process was active.
+
+### L28 — Existing-artifact handoff reviewed; evidence limit
+Explorer `mvdau8du-1-28k1` completed within the read-only artifact-mapping scope. It found no additional usable Chrome/driver debug, crash, profile, or startup log in the owned directory. The known `report.json` is a Playwright harness timeout, not Chromium stderr; `verify_ui.py` is source, not a log. Captures/config/downloads contain no files. Fontconfig caches and pnpm package metadata are not startup diagnostics. No external tool/job logs or personal storage databases were inspected.
+The map supports only this scoped negative result, not a claim that no logs exist anywhere. IPC/profile/path-length/resource explanations remain hypotheses. No correction, reinstall, launch, preview or UI retry follows from these facts. T6 is blocked at the evidence limit, with T4 still blocked. A separately authorized single bounded startup trace, without page navigation, is the smallest next probe; any conditional UI verification also requires explicit permission.
+
+### L29 — Explicit traced-startup / conditional-UI grant
+The live user selection was "Diagnóstico y, si arranca, prueba visual", with the exact limits in S9. Prepare the private runner/evidence paths before execution, preserve the failed reports, and attempt Chromium startup once with a 30000ms initialization limit and diagnostic logging only. Keep the same installed binary and functional defaults. Only if it starts may an owned preview of existing dist and the one desktop/mobile batch run. Close all owned processes afterward. No app-code/config/dependency change, installation, rebuild, alternate renderer, second startup or automatic repair is authorized. T6 is active; T4 is pending on the internal startup prerequisite.
+
+### L30 — Private runner prepared before the single attempt
+Evidence bundle: `.impeccable/review/ui-visual-196tbf4f/trace-9elp8soq`. Its private `run_browser_trace.py` passed AST syntax parsing without execution and contains exactly one `p.chromium.launch` call (SHA-256 `26bb7d8c0177ddaa0010e05ca66663b8f300a321059c1153a6fc5512f7f5db8d`). The original failed report and runner remain untouched. Process-local browser/driver logging captures stderr into this bundle; the existing owned HOME/config/cache/tmp roots and installed binary are retained, with no functional startup workaround.
+The runner initializes Chromium once with a 30000ms launch limit. Only after success does it start one owned existing-build preview, wait for its readiness output with a deadline, run the existing desktop/mobile batch, and clean up the owned preview in a finally block. No startup or UI result is claimed at preparation. No application-source/standing-config/dependency write or rebuild occurred.
+
+### L31 — Single authorized execution started
+Monitor `job-3` (`Single traced startup; conditional existing-build UI`) is running the prepared bundle. Driver/browser stderr and runner stdout are retained inside that bundle. Chromium initialization is limited to 30000ms; the 600s outer monitor only bounds the possible conditional UI batch and cleanup. No second startup, separate preview or duplicate test process is launched by the parent. The private runner starts/cleans an owned preview only after browser success. At this entry no startup marker, exit code, route result or screenshot has been received, so T6 stays in_progress and T4 pending. Completion/stage events, not polling, determine the next transition.
+
+### L32 — Single traced attempt failed before first CDP response
+Monitor job-3 exited 1 after 48s overall. The initialization limit was 30000ms; Chromium PID 151989 launched, and the driver sent `Browser.getVersion` at 04:24:22.108Z without a captured response before timeout. CPU/zygote/DBus verbose output does not establish a root cause. The trace records forced SIGKILL, process exit, and temporary-directory cleanup at 04:24:51.778–780Z. SIGKILL here is recorded timeout cleanup, not evidence of an independent Chrome crash.
+The report confirms failure phase startup, preview never started, zero route results and zero screenshots. Conditional UI verification did not execute. No second startup, preview, repair, alternate flags/renderer, install, application-source/config/dependency change or rebuild followed. T4 and T6 are blocked at exhausted proof, pending an explicitly selected alternative/manual verification path or a separately scoped environment investigation. No browser cause or website defect is claimed. Native review remains closed; current ledger updates are local/mirrored, not a new UI commit.
+
+### L33 — Preview-first delivery authorized and target checked
+User proposal and confirmation are quoted verbatim in S10. Cloudflare MCP confirms account `5f9647ea79727e6453ad9fb6cd2c82b4`, domain `ghandy.dev`, service `app-router-cloudflare`, worker tag `07948a0b996a4e13b73a9b2b30fd505d`. Current production is version `56d05084-28d4-44a4-ba83-37fd8e547479`, deployment `b5d83e2c-53ca-4353-bec3-df9980eeb7c8`; do not change it until preview review passes. The Worker has no Builds triggers and this repository has no GitHub workflow files, so the branch push has no discovered automatic production deployment path. Worker version previews are enabled; the workers.dev production endpoint is disabled. Browser Use/Playwright/Puppeteer tools are not registered; do not claim Browser Use is connected. Browser Rendering via Cloudflare is only a candidate until actually tested.
+Git status shows only this owned ledger tracked-dirty; UI commits already exist. Private `.impeccable/`, `.codegraph/`, and unrelated blueprint documents stay untracked/excluded. `git diff --check` passed. No local browser retry, config/dependency change, production deployment or new remote resource has occurred at this entry.
