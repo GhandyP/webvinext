@@ -1,6 +1,6 @@
 # People-first UI/UX
-Objective: Implement the authorized Home/shared-UI slice using the confirmed Bridges between perspectives composition; report rendered verification as pending.
-Branch: `docs/website-profile-blueprint` (existing shared worktree retained; work-unit commit now authorized, no push/deploy) | Delivery: ask-on-risk | Checks: focused public-markup tests, typecheck/suite, build, mechanical scan, independent source verification.
+Objective: Implement the authorized Home/shared-UI slice using the confirmed Bridges between perspectives composition; complete real remote verification before any conditional production promotion.
+Branch: `docs/website-profile-blueprint` (feature branch; authorized commit/push and preview uploaded) | Delivery: preview-first, production only after a passing remote review | Checks: focused public-markup tests, typecheck/suite, build, mechanical scan, independent source verification, plus incomplete rendered proof.
 
 ## Specs
 
@@ -54,6 +54,10 @@ The user selected: "Sí, usar Wrangler para la preview" (`authorize_existing_wra
 The live question states: "¿Autorizás a Wrangler oficial a usar y, si hace falta, renovar su autenticación existente en /home/ghandy/.config/.wrangler o /home/ghandy/.wrangler para subir únicamente una versión preview del build existente?"
 The option states: "Sin mostrar tokens, instalar ni cambiar código/configuración/dependencias. Logs y cachés nuevos dentro del proyecto. Producción sólo después de revisar la preview."
 
+### S12 — Scoped read-only diagnostic before promotion
+The user selected: "Diagnosticar antes de promover (recomendado)".
+The option states: "Investigar de forma acotada la consulta al proyecto y el footer con 1970, sólo lectura; sin modificar código ni producción."
+
 ### Implementation constraints and checks
 These are execution boundaries, not extra user claims:
 - English UI; preserve the incumbent visual identity and existing routes, metadata, content, and contact destination.
@@ -73,13 +77,15 @@ These are execution boundaries, not extra user claims:
 | T1 | S1–S6 | inline | done | RED: 4 fail / 1 pass; GREEN: 5/5; own checks passed; work-unit commit 818c10abbf5cea3c545db40ea8bbd18937935995 |
 | T2 | S1–S6 | inline/native | done | Own checks passed; review-de7e576b8d7ad1e2 approved for the frozen committed range; exact acknowledgement completed and authority burned; no rendered-proof claim |
 | T3 | S1–S6 | gentle-ai-verify | done | Source/typecheck/8 tests and exact-hash spot check passed for commit 818c10a; scope incident/cleanup recorded; no visual/native approval |
-| T4 | S2, S5–S6, S9–S10 | remote proof via T8–T9 | pending | Historical local failures retained; now depends on the explicitly authorized remote preview/review path, not another local attempt |
+| T4 | S2, S5–S6, S9–S10 | remote proof via T8–T9 | pending | Home desktop/mobile and About desktop inspected; project detail mobile inspected. Full route review blocked by visible 1970 footer and incomplete remaining route/desktop evidence; no trusted keyboard/touch/WCAG/user-research claim |
 | T5 | S6–S7 | inline | done | 818c10abbf5cea3c545db40ea8bbd18937935995: feat(ui): connect the people-first home experience; 7 owned files, no push/deploy |
 | T6 | S6, S8–S9 | local diagnosis retired | dropped | Local attempts failed and root cause remains unconfirmed; delivery moved to the user-authorized remote path, without more local launches or repair |
 | T7 | S10 | inline commit/push | done | Ledger commit 464dd1d; git push origin HEAD:refs/heads/docs/website-profile-blueprint exited 0; private/unrelated artifacts excluded |
 | T8 | S10–S11 | official existing-build upload | done | Job-6 exit0; preview version fad61ae5-b2b8-4bb9-91af-29f260617031 exists; MCP confirms production still old version at100% |
-| T9 | S2, S5–S6, S10 | Cloudflare remote browser review | blocked | Real Home desktop/mobile and About evidence inspected; primary project-route query produced unusable MCP JSON, HTTP/DOM unknown; needs manual confirmation or scoped diagnosis |
+| T9 | S2, S5–S6, S10 | Cloudflare remote browser review | blocked | Project detail route separately returned HTTP200 with one main/h1, active Projects nav, no overflow and main-content focus. Full-page 390x3107 mobile WebP was hash-validated and visually inspected; footer displays 1970. Desktop screenshot query was rejected by Cloudflare Browser Rendering API with `2001: Rate limit exceeded`; other agreed routes remain unrun. Not a site error; do not promote. |
 | T10 | S10 | conditional production promotion | pending | Promote only a remotely verified passing preview; preserve current active version as rollback reference |
+| T11 | S12 | bounded read-only diagnostic | done | Raw diagnostic reply preserved in `project-diagnostic-raw.json`; project page returned 200. `lib/site-config.ts:48` evaluates copyright year at module import; same preview displays 1970. Code path identified, exact Worker-time cause not conclusively established; no application-code/config/production changes |
+| T12 | S10, S12 | inline, only after separate explicit authorization | blocked | A narrow footer-date correction would require new source/test/build/preview authorization. No code change authorized or made; production remains unchanged |
 
 ## Log
 
@@ -276,3 +282,11 @@ Complete cached screenshot slices were integrity-matched and saved/decoded local
 ### L44 — Required project-route proof unavailable; production held
 The project-detail query `/projects/webvinext-site` did not yield usable MCP JSON (`SyntaxError: unexpected token: 'Error'`). Its underlying raw error/status was not retained by the initial parser, so neither an HTTP failure nor a website defect is established. The request constructor passed local Node syntax parsing (exit0), with no repeated API request. The remaining 404/Projects/Blog/article cases were not launched after that missing proof. About's already captured cached image was completed/inspected as artifact retrieval, not a new route check.
 The captured footer visibly says 1970, and two featured cards share a title. No cause or baseline equivalence is claimed: a separate non-browser production HTML read returned403 and yielded no comparison. The PageShell UI diff does not change footer logic, but that alone does not prove the live baseline. No code/content correction was made. T9 is blocked on explicit manual confirmation or a separately scoped diagnostic path; T4 and conditional T10 remain pending. No production promotion, extra verifier, browser retry, install or rebuild follows. This evidence checkpoint is documentation-only on the existing feature branch; private artifacts stay excluded.
+
+### L45 — Explicit bounded read-only diagnostic authorized
+The user selected "Diagnosticar antes de promover (recomendado)" with S12's exact read-only limits. Investigate the project-query result with raw response preservation and inspect the footer implementation before proposing any correction. No application-code edit, production promotion, credential extraction, environment repair, install or local browser retry is authorized. T11 was the sole active task; previous missing proof is not reclassified as a website defect.
+
+### L46 — Project diagnosis completed; incorrect footer prevents preview acceptance
+The fresh actual preview snapshot for `/projects/webvinext-site` returned origin HTTP200 and title `WebVinext Platform — Ghandy`; bounded DOM proof shows one main/h1, active Projects navigation, document width 1440 at viewport 1440, no overflow, and a working skip-to-main focus target. Thus the prior MCP parse error did not recur; its original cause remains unknown. Full-page mobile screenshot at 390x3107 was completely recovered from cached slices, integrity-checked (WebP SHA-256 `37eadf6099de0a37fbf16abb0dcc062f81ac7b6542e7e5fecad947066d78e898`) and visually inspected. The content/layout is legible without observed clipping; footer says `© 1970 Ghandy`.
+The source of the year is `lib/site-config.ts:48`: `FOOTER_COPYRIGHT` is initialized from `new Date().getFullYear()` at module scope, consumed by `components/site-footer.tsx:7`. Git confirms `lib/site-config.ts` is unchanged between the original base (`9435b40`) and UI commit (`818c10a`), so the behavior predates this UI slice. The import-time evaluation explains the code path but does not by itself prove the exact reason Cloudflare rendered 1970. No source/config/dependency change was authorized or made.
+The project desktop screenshot request returned `isError: true`, `Cloudflare API error: 2001: Rate limit exceeded`; this is an API failure, not evidence of the route failing. No retry was issued. The remaining 404/Projects-list/Blog/article cases were not captured. T11 is done, but T9/T4 remain blocked and T10 remains pending: the complete preview review is not a pass, so production stays on `56d05084-28d4-44a4-ba83-37fd8e547479` at 100%. Resolving the visible footer date requires a separate explicit code/test/build/new-preview authorization; the user's selected S12 scope was read-only. Screenshots and raw MCP output remain private under `.impeccable/review/cloudflare-delivery-ldsz_jve/` and are not committed.
