@@ -17,7 +17,7 @@ Baseline: 3a745f5; current feature branch: docs/website-profile-blueprint. Keep 
 | V2 | S1, S3, S6 | inline: author two original SVG diagrams | done | Both standalone SVGs parse; mobile-scale minimum label sizes are 12.2px and 17.5px at 350px; source flow verified against generator, content loader, route, and Worker. Browser rendering remains V4. |
 | V3 | S1, S3, S6 | inline: compose Home and the real WebVinext case | done | Home and WebVinext-only flow figures have accessible alternatives/captions and responsive styles. Focused route tests pass 7/7, including unchanged behavior for another project; browser review remains V4. |
 | V4 | S3–S6 | checks: suite, typecheck, build, detector, preview functions and responsive visual inspection | blocked | Suite 42/42, typecheck, build, remote route/year/assets checks pass. Detector exited 2 for unchanged baseline CSS patterns. Native assess is unassessable due untracked files. Cloudflare Browser Run returned 2001 rate limit for the one fresh screenshot request; no screenshot/local Chromium retry. Preview remains live and production traffic is unchanged. |
-| V5 | S3–S4 | commit and push the bounded first-delivery implementation | in_progress | Stage only delivery-owned files. Preserve unrelated drafts/private evidence. Record the resulting commit as evidence. |
+| V5 | S3–S4 | commit and push the bounded first-delivery implementation | in_progress | Source commit `f891f17` contains 302 changed lines across 11 owned paths; push pending. The hook reports 1,234 authored lines in 8 branch commits from `origin/main`; this is the current delivery boundary, separate from earlier people-first commit `818c10a`. No further source commit is planned; record boundary before the ledger follow-up. |
 | V6 | S3–S4 | conditionally promote the fresh preview to production | blocked | Waiting for the user's decision: accept HTTP functional proof without responsive screenshots, or hold production until visual proof is available. Do not promote before this is resolved. |
 
 ## Design intent
@@ -78,3 +78,6 @@ The one fresh Cloudflare Browser Run snapshot request for the new preview return
 
 ### L17 — Separate commit/push from production decision
 Keep the explicitly authorized bounded commit and push moving. Split production promotion into a separate task because the requested desktop/mobile visual proof is unavailable. Before promotion, ask whether the user accepts the passing HTTP/SSR route, year, and asset checks as sufficient or wants production held until visual proof is available.
+
+### L18 — Work-unit boundary
+Commit `f891f17` (`feat(site): add visual first-delivery improvements`) contains 302 changed lines across 11 delivery-owned paths. Its hook reports 1,234 authored changed lines across 8 commits on the feature branch since `origin/main`; the earlier people-first UI commit `818c10a` is a separate slice. This feature's source work-unit is complete; no further source commit is planned. The next commit is only the ODD tracking record.
